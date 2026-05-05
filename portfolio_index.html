@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Lee Eunjin — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+:root{
+  --ivory:#F2EFE9;
+  --ivory2:#EAE6DE;
+  --ivory3:#E0DBD1;
+  --ink:#2A2722;
+  --ink2:#524D47;
+  --ink3:#8A7F74;
+  --ink4:#B5AFA8;
+  --line:rgba(90,82,72,0.16);
+  --line-dk:rgba(242,239,233,0.1);
+  --gold:#7A5F2A;
+  --gold2:#C4A45A;
+}
+body{font-family:'Noto Sans KR',sans-serif;background:var(--ivory);color:var(--ink);-webkit-font-smoothing:antialiased;line-height:1.7}
+a{text-decoration:none;color:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding:0 48px}
+@media(max-width:700px){.wrap{padding:0 22px}}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:200;background:rgba(13,17,23,0.96);backdrop-filter:blur(14px);border-bottom:0.5px solid rgba(255,255,255,0.07)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;max-width:1120px;margin:0 auto;padding:0 48px;height:58px}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:300;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,0.7)}
+.hamburger{display:flex;flex-direction:column;justify-content:center;gap:5px;width:36px;height:36px;cursor:pointer;padding:6px;border:0.5px solid rgba(255,255,255,0.15);background:transparent;transition:.2s;flex-shrink:0}
+.hamburger:hover{background:rgba(255,255,255,0.08)}
+.hamburger span{display:block;height:0.5px;background:rgba(255,255,255,0.7);transition:.25s}
+.hamburger:hover span{background:#fff}
+.hamburger.open span:nth-child(1){transform:translateY(5.5px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.hamburger.open span:nth-child(3){transform:translateY(-5.5px) rotate(-45deg)}
+.nav-drawer{position:fixed;top:58px;right:0;width:260px;background:#0D1117;border-left:0.5px solid rgba(255,255,255,0.07);border-bottom:0.5px solid rgba(255,255,255,0.07);transform:translateX(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);z-index:199}
+.nav-drawer.open{transform:translateX(0)}
+.nav-drawer a{display:block;padding:16px 28px;font-size:11px;font-weight:400;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.45);border-bottom:0.5px solid rgba(255,255,255,0.07);transition:.15s}
+.nav-drawer a:last-child{border-bottom:none}
+.nav-drawer a:hover,.nav-drawer a.on{background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.9)}
+.nav-overlay{display:none;position:fixed;inset:0;z-index:198;background:rgba(42,39,34,0.25)}
+
+/* HERO */
+.hero{
+  min-height:100vh;
+  background:#0D1117;
+  position:relative;overflow:hidden;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:80px 48px 100px;
+}
+.hero-bg-glow{
+  position:absolute;
+  width:600px;height:600px;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(99,120,180,0.08) 0%, transparent 70%);
+  top:50%;left:50%;transform:translate(-50%,-50%);
+  pointer-events:none;
+}
+.hero-content{position:relative;z-index:2;text-align:center;max-width:900px}
+.hero-label{
+  font-size:11px;letter-spacing:4px;
+  color:rgba(255,255,255,0.3);text-transform:uppercase;
+  margin-bottom:36px;font-weight:300;
+  opacity:0;animation:fu .8s .1s ease forwards;
+}
+.hero-title{
+  font-family:'Noto Sans KR',sans-serif;
+  font-size:clamp(38px,6vw,72px);
+  font-weight:700;letter-spacing:-1.5px;
+  color:#ffffff;line-height:1.15;
+  margin-bottom:24px;
+  opacity:0;animation:fu .9s .25s ease forwards;
+}
+.hero-title em{font-style:normal;color:rgba(255,255,255,0.45)}
+.hero-desc{
+  font-size:clamp(14px,1.8vw,18px);
+  font-weight:300;letter-spacing:0.2px;
+  color:rgba(255,255,255,0.45);
+  line-height:1.75;
+  opacity:0;animation:fu .7s .45s ease forwards;
+}
+.hero-divider{
+  width:32px;height:0.5px;
+  background:rgba(255,255,255,0.15);
+  margin:36px auto;
+  opacity:0;animation:fu .6s .6s ease forwards;
+}
+.hero-stats{
+  display:flex;flex-wrap:nowrap;justify-content:center;gap:10px;
+  width:fit-content;margin:0 auto;
+  opacity:0;animation:fu .7s .6s ease forwards;
+}
+.hero-stat{
+  display:flex;flex-direction:column;align-items:center;
+  padding:14px 28px;
+  border:1.5px solid rgba(255,255,255,0.22);
+  border-radius:999px;
+  background:rgba(255,255,255,0.06);
+  backdrop-filter:blur(8px);
+  text-align:center;
+  transition:.2s;
+}
+.hero-stat:hover{background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.35)}
+.hero-stat-num{
+  font-size:11px;letter-spacing:0.5px;
+  color:rgba(255,255,255,0.5);font-weight:300;
+  margin-bottom:6px;
+}
+.hero-stat-label{
+  font-family:'Noto Sans KR',sans-serif;
+  font-size:22px;font-weight:700;letter-spacing:-0.5px;
+  color:#ffffff;line-height:1;
+}
+.scroll-indicator{
+  position:absolute;bottom:36px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  opacity:0;animation:fi 1s 1.3s ease forwards;
+}
+.scroll-bar{width:0.5px;height:32px;background:rgba(255,255,255,0.2);animation:scrollAnim 1.8s ease-in-out infinite}
+.scroll-lbl{font-size:9px;letter-spacing:3px;color:rgba(255,255,255,0.2);text-transform:uppercase}
+@keyframes scrollAnim{
+  0%{transform:scaleY(0);transform-origin:top}
+  50%{transform:scaleY(1);transform-origin:top}
+  51%{transform-origin:bottom}
+  100%{transform:scaleY(0);transform-origin:bottom}
+}
+@keyframes fu{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes fi{from{opacity:0}to{opacity:1}}
+
+/* SECTION */
+.sec{padding:96px 0;border-top:0.5px solid var(--line)}
+.sec-dk{background:var(--ink);border-top:0.5px solid var(--line-dk)}
+.sec-mid{background:var(--ivory2);border-top:0.5px solid var(--line)}
+.sec-header{margin-bottom:10px}
+.eyebrow{font-size:11px;letter-spacing:6px;text-transform:uppercase;font-weight:500;color:var(--gold2);margin-bottom:35px}
+.sec-dk .eyebrow{color:rgba(196,164,90,0.6)}
+.sec-num{font-family:'Cormorant Garamond',serif;font-size:10px;letter-spacing:2px;color:var(--ink4);text-transform:uppercase;margin-bottom:6px}
+.sec-dk .sec-num{color:rgba(242,239,233,0.2)}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,4.5vw,58px);font-weight:300;letter-spacing:-1.5px;line-height:1.08;color:var(--ink)}
+.sec-dk .sec-title{color:var(--ivory)}
+.sec-lead{font-size:17px;font-weight:300;color:var(--ink3);max-width:560px;line-height:1.85;margin-top:40px}
+.sec-dk .sec-lead{color:rgba(242,239,233,0.38)}
+.hdivider{display:flex;align-items:center;gap:18px;margin-bottom:28px}
+.hdivider::before,.hdivider::after{content:'';flex:1;height:0.5px;background:var(--line)}
+.sec-dk .hdivider::before,.sec-dk .hdivider::after{background:var(--line-dk)}
+.hdivider span{font-size:9px;letter-spacing:3px;color:var(--ink4);text-transform:uppercase;white-space:nowrap}
+.sec-dk .hdivider span{color:rgba(242,239,233,0.2)}
+
+/* FILE LIST */
+.file-list{display:flex;flex-direction:column;gap:0;border:0.5px solid var(--line)}
+.sec-dk .file-list{border-color:var(--line-dk)}
+.file-row{display:flex;align-items:center;justify-content:space-between;padding:13px 18px;border-bottom:0.5px solid var(--line);font-size:23px;font-weight:400;color:var(--ink2);letter-spacing:0.2px;transition:.15s;text-decoration:none}
+.file-row:last-child{border-bottom:none}
+.file-row:hover{background:var(--ivory3);color:var(--ink)}
+.file-row.dk{border-color:var(--line-dk);color:rgba(242,239,233,0.4)}
+.file-row.dk:hover{background:rgba(242,239,233,0.05);color:rgba(242,239,233,0.75)}
+.file-arrow{font-size:13px;color:var(--ink4);flex-shrink:0}
+
+/* ── 01 한국코드페어 ── */
+.kcf-stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:0.5px solid var(--line);margin-bottom:32px}
+.kcf-stat{background:var(--ivory);padding:24px 22px}
+.kcf-stat-num{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:300;letter-spacing:-1.5px;color:var(--ink);line-height:1;margin-bottom:6px}
+.kcf-stat-label{font-size:11px;color:var(--ink3);font-weight:300}
+.kcf-layout{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:0.5px solid var(--line)}
+.kcf-left{background:var(--ivory);padding35}
+.kcf-right{background:var(--ivory2);padding35}
+.case-list{display:flex;flex-direction:column;gap:0;border:0.5px solid var(--line)}
+.case-item{padding:16px 20px;border-bottom:0.5px solid var(--line);display:grid;grid-template-columns:44px 1fr auto;gap:14px;align-items:center}
+.case-item:last-child{border-bottom:none}
+.case-year{font-family:'Cormorant Garamond',serif;font-size:13px;font-weight:300;color:var(--ink3);letter-spacing:0.5px}
+.case-title{font-size:13px;font-weight:500;color:var(--ink);margin-bottom:4px;letter-spacing:-0.2px}
+.case-tag-row{display:flex;gap:5px;flex-wrap:wrap}
+.ctag{font-size:9.5px;font-weight:400;letter-spacing:1px;padding:2px 7px;border:0.5px solid var(--line);color:var(--ink3);text-transform:uppercase}
+.award-badge{font-size:9.5px;font-weight:500;letter-spacing:1px;padding:4px 9px;text-transform:uppercase;background:var(--ink);color:var(--ivory);white-space:nowrap}
+@media(max-width:800px){.kcf-layout{grid-template-columns:1fr}}
+
+/* ── 02 교재 ── */
+.books-top{display:grid;grid-template-columns:auto 1fr;gap:48px;align-items:end;margin-bottom:52px;padding-bottom:32px;border-bottom:0.5px solid var(--line-dk)}
+.books-bignum{font-family:'Cormorant Garamond',serif;font-size:120px;font-weight:300;letter-spacing:-8px;color:rgba(242,239,233,0.06);line-height:1}
+.book-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:1px;background:rgba(242,239,233,0.08);border:0.5px solid rgba(242,239,233,0.08)}
+.book-card{background:transparent;transition:.2s;display:flex;flex-direction:column}
+.book-card:hover{background:rgba(242,239,233,0.04)}
+.book-spine{height:4px;background:var(--gold2);opacity:0.5}
+.book-cover-area{aspect-ratio:3/4;padding:18px 12px 12px;display:flex;flex-direction:column;justify-content:space-between;border-bottom:0.5px solid rgba(242,239,233,0.07)}
+.bvol{font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:2px;color:rgba(242,239,233,0.2);text-transform:uppercase}
+.btitle{font-size:10.5px;font-weight:400;color:rgba(242,239,233,0.5);line-height:1.5;letter-spacing:0.2px}
+.binfo{padding:12px 12px 0;flex:1}
+.bname{font-size:11px;font-weight:500;color:rgba(242,239,233,0.6);margin-bottom:4px;line-height:1.4;letter-spacing:-0.2px}
+.bmeta{font-size:9.5px;color:rgba(242,239,233,0.25);font-weight:300;line-height:1.5}
+.blinks{display:flex;gap:0;margin-top:auto;border-top:0.5px solid rgba(242,239,233,0.07)}
+.blink{flex:1;padding:10px 0;text-align:center;font-size:9px;letter-spacing:1.5px;color:rgba(242,239,233,0.28);text-transform:uppercase;font-weight:400;border-right:0.5px solid rgba(242,239,233,0.07);transition:.15s}
+.blink:last-child{border-right:none}
+.blink:hover{background:rgba(242,239,233,0.07);color:rgba(242,239,233,0.75)}
+@media(max-width:1000px){.book-grid{grid-template-columns:repeat(4,1fr)}.books-top{grid-template-columns:1fr}}
+@media(max-width:580px){.book-grid{grid-template-columns:repeat(2,1fr)}}
+
+/* ── 03 입시컨설팅 ── */
+.adm-layout{display:grid;grid-template-columns:1.1fr 0.9fr;gap:1px;background:var(--line);border:0.5px solid var(--line)}
+.adm-left{background:var(--ivory);padding:44px}
+.adm-right{background:var(--ivory2);padding:44px}
+.adm-univ-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:0.5px solid var(--line);margin-bottom:32px}
+.adm-univ{background:var(--ivory);padding:20px}
+.adm-univ-name{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;letter-spacing:-0.5px;color:var(--ink);margin-bottom:5px}
+.adm-univ-dept{font-size:11.5px;color:var(--ink3);font-weight:300}
+.adm-flow{display:flex;flex-direction:column;gap:0;border:0.5px solid var(--line)}
+.adm-step{display:grid;grid-template-columns:28px 1fr;gap:16px;padding:16px 20px;border-bottom:0.5px solid var(--line);align-items:start}
+.adm-step:last-child{border-bottom:none}
+.adm-step-num{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:300;color:var(--ink4);line-height:1.2}
+.adm-step-title{font-size:13px;font-weight:500;color:var(--ink);margin-bottom:4px}
+.adm-step-desc{font-size:12px;color:var(--ink3);font-weight:300;line-height:1.65}
+@media(max-width:800px){.adm-layout{grid-template-columns:1fr}}
+
+/* ── 04 소논문 ── */
+.paper-layout{display:grid;grid-template-columns:0.9fr 1.1fr;gap:56px;align-items:start}
+.paper-process-title{font-size:11px;letter-spacing:2px;color:var(--ink4);text-transform:uppercase;margin-bottom:20px;font-weight:400}
+.paper-steps{display:flex;flex-direction:column;gap:0}
+.paper-step{display:grid;grid-template-columns:20px 1fr;gap:20px;padding:20px 0;border-bottom:0.5px solid var(--line);align-items:start}
+.paper-step:last-child{border-bottom:none}
+.ps-num{font-family:'Cormorant Garamond',serif;font-size:11px;font-weight:300;color:var(--ink4);margin-top:2px;letter-spacing:1px}
+.ps-title{font-size:13.5px;font-weight:500;color:var(--ink);margin-bottom:5px;letter-spacing:-0.2px}
+.ps-desc{font-size:12.5px;color:var(--ink3);font-weight:300;line-height:1.7}
+.subject-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:0.5px solid var(--line);margin-bottom:28px}
+.subject-card{background:var(--ivory2);padding:22px 20px}
+.subj-field{font-size:9.5px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:8px;font-weight:500}
+.subj-title{font-size:13px;font-weight:500;color:var(--ink);margin-bottom:5px;letter-spacing:-0.2px}
+.subj-desc{font-size:11.5px;color:var(--ink3);font-weight:300;line-height:1.6}
+@media(max-width:800px){.paper-layout{grid-template-columns:1fr}.subject-grid{grid-template-columns:1fr}}
+
+/* ── 05 올림피아드 ── */
+.koi-layout{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:rgba(242,239,233,0.08);border:0.5px solid rgba(242,239,233,0.08)}
+.koi-col{background:transparent;padding:36px 30px}
+.koi-col-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:300;letter-spacing:-0.3px;color:var(--ivory);margin-bottom:4px}
+.koi-col-sub{font-size:10px;color:rgba(242,239,233,0.28);font-weight:300;margin-bottom:24px;letter-spacing:1px}
+.koi-items{display:flex;flex-direction:column;gap:0}
+.koi-item{padding:12px 0;border-bottom:0.5px solid var(--line-dk);font-size:12.5px;font-weight:300;color:rgba(242,239,233,0.45);line-height:1.6}
+.koi-item:last-child{border-bottom:none}
+.koi-item strong{font-weight:500;color:rgba(242,239,233,0.75);display:block;font-size:12.5px;margin-bottom:2px}
+.koi-level-bar{display:flex;gap:1px;margin-top:24px}
+.klv{flex:1;padding:9px 0;text-align:center;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;font-weight:400}
+.klv-lo{background:rgba(242,239,233,0.05);color:rgba(242,239,233,0.25)}
+.klv-mid{background:rgba(242,239,233,0.09);color:rgba(242,239,233,0.45)}
+.klv-hi{background:rgba(196,164,90,0.18);color:var(--gold2)}
+@media(max-width:800px){.koi-layout{grid-template-columns:1fr}}
+
+/* ── 06 캡스톤 ── */
+.cap-layout{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:0.5px solid var(--line);margin-bottom:24px}
+.cap-cell{background:var(--ivory);padding:36px}
+.cap-cell.alt{background:var(--ivory2)}
+.cap-field{font-size:9.5px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:10px;font-weight:500}
+.cap-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;letter-spacing:-0.5px;color:var(--ink);margin-bottom:10px}
+.cap-desc{font-size:13px;color:var(--ink3);font-weight:300;line-height:1.8}
+.cap-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
+.cap-tag{font-size:9.5px;font-weight:400;letter-spacing:1px;padding:4px 10px;border:0.5px solid var(--line);color:var(--ink3);text-transform:uppercase}
+@media(max-width:700px){.cap-layout{grid-template-columns:1fr}}
+
+/* ABOUT */
+.about-layout{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line-dk);border:0.5px solid var(--line-dk)}
+.about-cell{padding:44px}
+.about-cell h3{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;letter-spacing:-0.5px;color:var(--ivory);margin-bottom:18px}
+.about-cell p{font-size:13.5px;color:rgba(242,239,233,0.45);font-weight:300;line-height:1.9;margin-bottom:10px}
+.about-cell p:last-child{margin-bottom:0}
+.skill-wrap{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.sk{font-size:9.5px;letter-spacing:1.5px;font-weight:400;padding:5px 12px;text-transform:uppercase;border:0.5px solid rgba(242,239,233,0.15);color:rgba(242,239,233,0.4)}
+@media(max-width:700px){.about-layout{grid-template-columns:1fr}}
+
+/* CONTACT */
+.contact-inner{display:grid;grid-template-columns:1fr auto;gap:48px;align-items:center;padding:52px 0;border-top:0.5px solid var(--line);border-bottom:0.5px solid var(--line)}
+.contact-title{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4vw,52px);font-weight:300;letter-spacing:-1.5px;color:var(--ink);line-height:1.08}
+.contact-sub{font-size:13.5px;color:var(--ink3);font-weight:300;margin-top:12px;line-height:1.75}
+.contact-btn{display:inline-flex;align-items:center;gap:14px;padding:16px 28px;border:0.5px solid var(--ink);font-size:17px;letter-spacing:2.5px;text-transform:uppercase;font-weight:400;color:var(--ink);transition:.2s;white-space:nowrap}
+.contact-btn:hover{background:var(--ink);color:var(--ivory)}
+@media(max-width:700px){.contact-inner{grid-template-columns:1fr}}
+
+/* FOOTER */
+footer{background:var(--ink);padding:28px 48px;border-top:0.5px solid var(--line-dk)}
+.footer-inner{max-width:1120px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+.footer-logo{font-family:'Cormorant Garamond',serif;font-size:13px;font-weight:300;letter-spacing:4px;color:rgba(242,239,233,0.3);text-transform:uppercase}
+.footer-copy{font-size:11px;color:rgba(242,239,233,0.2);letter-spacing:0.3px}
+</style>
+</head>
+<body>
+
+<div class="nav-overlay" id="overlay" onclick="closeMenu()"></div>
+<div class="nav-drawer" id="drawer">
+  <a href="portfolio_index.html" onclick="closeMenu()">Home</a>
+  <a href="korea-code-fair.html" onclick="closeMenu()">한국코드페어 지도</a>
+  <a href="isef_international_page/isef-track.html" onclick="closeMenu()">국제대회 지도</a>
+  <a href="books_responsive.html" onclick="closeMenu()">코딩 교재 출판</a>
+  <a href="consulting.html" onclick="closeMenu()">입시 컨설팅</a>
+  <a href="research-paper-guidance.html" onclick="closeMenu()">소논문 지도</a>
+  <a href="pdf/경시부문_지도실적.pdf" onclick="closeMenu()">알고리즘 대회 지도</a>
+  <a href="results.html" onclick="closeMenu()">진학 진도</a>
+  <a href="#about" onclick="closeMenu()">About</a>
+  <a href="#contact" onclick="closeMenu()">Contact</a>
+</div>
+<nav>
+  <div class="nav-inner">
+    <div style="display:flex;align-items:center;gap:16px">
+      <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </div>
+      <div class="nav-logo">Lee · Eunjin</div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg-glow"></div>
+
+  <div class="hero-content">
+    <div class="hero-label">Lee Eunjin &nbsp;·&nbsp; AI · Coding Consulting Portfolio 2026</div>
+    <div class="hero-title">
+      AI·코딩 입시<br/>
+      <em>포트폴리오 컨설팅</em>
+    </div>
+
+    <div class="hero-divider"></div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-label" ><a href="korea-code-fair.html">코드페어 지도</a></div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-label"><a href="isef_international_page/isef-track.html">국제대회 지도</a></div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-label"><a href="books_responsive.html">교재 출판</a></div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-label"><a href="research-paper-guidance.html">소논문 지도</a></div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-label"><a href="consulting.html">입시 컨설팅</a></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="scroll-indicator">
+    <div class="scroll-bar"></div>
+    <div class="scroll-lbl">Scroll</div>
+  </div>
+</section>
+
+<!-- SUMMARY CARDS -->
+<section class="sec" id="summary">
+  <div class="wrap">
+    <div class="sec-header">
+      <div class="eyebrow">Portfolio Overview</div>
+      <div class="sec-title">주요 활동 영역</div>
+      <div class="sec-lead">각 영역을 클릭하면 상세 페이지로 이동합니다.</div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px">
+      <a class="file-row" href="korea-code-fair.html">한국코드페어 지도 <span class="file-arrow">↗</span></a>
+      <a class="file-row" href="isef_international_page/isef-track.html">국제대회 지도 <span class="file-arrow">↗</span></a>
+      <a class="file-row" href="pdf/경시부문_지도실적.pdf">정보올림피아드 <span class="file-arrow">↗</span></a>
+      <a class="file-row" href="research-paper-guidance.html">소논문 지도 <span class="file-arrow">↗</span></a>
+      <a class="file-row" href="consulting.html">입시 컨설팅 <span class="file-arrow">↗</span></a>
+      <a class="file-row" href="books_responsive.html">코딩 교재 출판 <span class="file-arrow">↗</span></a>
+      <a class="file-row" href="results.html">진학 지도 <span class="file-arrow">↗</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="sec sec-dk" id="about">
+  <div class="wrap">
+    <div class="sec-header">
+      <div class="eyebrow">About</div>
+      <div class="sec-title">이은진</div>
+    </div>
+    <div class="about-layout">
+      <div class="about-cell">
+        <h3>AI·코딩 교육 전문가</h3>
+        <p>단순한 코딩 교육을 넘어, 학생의 데이터를 기반으로 연구·수상·입시까지 연결되는 전략형 프로젝트를 설계합니다.</p>
+      </div>
+      <div class="about-cell">
+        <h3>핵심 실적</h3>
+        <p>· 한국코드페어 장기 지도 및 성과 창출</p>
+        <p>· 대상·금상 포함 다수 수상 실적</p>
+        <p>· AI·SW 진학 컨설팅 전문 운영</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="sec" id="contact">
+  <div class="wrap">
+    <div class="contact-inner">
+      <div>
+        <div class="eyebrow">Contact</div>
+        <div class="contact-title">문의하기</div>
+      </div>
+      <a class="contact-btn" href="mailto:ej070829@gmail.com">이메일 문의하기 →</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Lee · Eunjin</div>
+    <div class="footer-copy">© 2026</div>
+  </div>
+</footer>
+
+<script>
+function toggleMenu(){
+  const h=document.getElementById('hamburger');
+  const d=document.getElementById('drawer');
+  const o=document.getElementById('overlay');
+  h.classList.toggle('open');
+  d.classList.toggle('open');
+  o.style.display=d.classList.contains('open')?'block':'none';
+}
+function closeMenu(){
+  document.getElementById('hamburger').classList.remove('open');
+  document.getElementById('drawer').classList.remove('open');
+  document.getElementById('overlay').style.display='none';
+}
+// 드로어 링크 활성 표시
+const drawerLinks=document.querySelectorAll('.nav-drawer a');
+const secs=document.querySelectorAll('section[id]');
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const id=e.target.id;
+      drawerLinks.forEach(n=>n.classList.remove('on'));
+      const m=document.querySelector(`.nav-drawer a[href="#${id}"]`);
+      if(m)m.classList.add('on');
+    }
+  });
+},{threshold:0.3});
+secs.forEach(s=>io.observe(s));
+</script>
+</body>
+</html>

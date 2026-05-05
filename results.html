@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>입학 지도 실적</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+/* NAV */
+nav{position:sticky;top:0;left:0;right:0;z-index:200;width:100%;background:#151a20;border-bottom:1px solid rgba(255,255,255,0.08)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;max-width:1120px;margin:0 auto;padding:0 32px;height:76px}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:300;letter-spacing:5px;text-transform:uppercase;color:rgba(255,255,255,0.72);text-decoration:none}
+.back-link{display:inline-block;padding:15px 19px;border:1px solid rgba(255,255,255,0.14);color:rgba(255,255,255,0.52);text-decoration:none;font-size:11px;font-weight:700;letter-spacing:4px;text-transform:uppercase;transition:.2s}
+.back-link:hover{color:#fff;border-color:rgba(255,255,255,0.35);background:rgba(255,255,255,0.04)}
+
+body {
+    margin: 0;
+    font-family: 'Pretendard', 'Noto Sans KR', Arial, sans-serif;
+    background: #f3f0ea;
+    color: #111;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* HEADER */
+.header {
+    padding: 60px 8% 40px;
+}
+
+.label {
+    letter-spacing: 6px;
+    font-size: 13px;
+    font-weight: 800;
+    color: #9a6a25;
+    margin-bottom: 14px;
+}
+
+.header h1 {
+    font-size: 52px;
+    margin: 0 0 18px;
+    line-height: 1.15;
+}
+
+.header p {
+    font-size: 18px;
+    color: #6b7280;
+    line-height: 1.7;
+    margin: 0;
+}
+
+/* SUMMARY */
+.summary {
+    margin: 30px 8% 40px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border: 1px solid #d8d2c8;
+    background: #f8f4ed;
+}
+
+.summary-box {
+    padding: 32px;
+    text-align: center;
+    border-right: 1px solid #d8d2c8;
+}
+
+.summary-box:last-child {
+    border-right: none;
+}
+
+.summary-box strong {
+    display: block;
+    font-size: 42px;
+    margin-bottom: 8px;
+}
+
+.summary-box span {
+    color: #7c6f64;
+}
+
+/* SECTION */
+.section {
+    padding: 35px 8% 80px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+}
+
+.card {
+    background: #fffaf3;
+    border: 1px solid #ddd5ca;
+    border-radius: 18px;
+    padding: 34px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+}
+
+.card h2 {
+    margin: 0 0 24px;
+    font-size: 28px;
+}
+
+.result-list {
+    line-height: 2;
+    font-size: 17px;
+}
+
+.result-list b {
+    color: #111;
+}
+
+.highlight-box {
+    margin-top: 28px;
+    background: #dff2ff;
+    color: #073b63;
+    padding: 22px;
+    border-radius: 14px;
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.highlight-box span {
+    display: block;
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #25637f;
+}
+
+/* UNIST */
+.unist-card {
+    margin-top: 28px;
+    background: linear-gradient(135deg, #111827, #1e293b);
+    color: white;
+    border-radius: 24px;
+    padding: 42px;
+}
+
+.unist-card h2 {
+    font-size: 34px;
+    margin: 0 0 18px;
+}
+
+.unist-card p {
+    color: #cbd5e1;
+    font-size: 18px;
+    line-height: 1.8;
+    margin: 0 0 16px;
+}
+
+.unist-tag {
+    display: inline-block;
+    margin-top: 16px;
+    padding: 10px 18px;
+    border-radius: 999px;
+    background: #38bdf8;
+    color: #020617;
+    font-weight: 800;
+}
+
+/* FOOTER */
+.footer {
+    text-align: center;
+    padding: 50px 20px;
+    color: #7c6f64;
+}
+
+.btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 14px 28px;
+    border-radius: 999px;
+    background: #111;
+    color: white;
+    font-weight: 800;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+    .header h1 {
+        font-size: 38px;
+    }
+
+    .summary,
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .summary-box {
+        border-right: none;
+        border-bottom: 1px solid #d8d2c8;
+    }
+
+    .summary-box:last-child {
+        border-bottom: none;
+    }
+}
+</style>
+</head>
+
+<body>
+  <nav>
+    <div class="nav-inner">
+      <a class="nav-logo" href="portfolio_index.html">Lee · Eunjin</a>
+      <a class="back-link" href="portfolio_index.html">Portfolio Home</a>
+    </div>
+  </nav>
+
+  <header class="header">
+    <div class="label">ADMISSION RESULTS</div>
+    <h1>입학 지도 실적</h1>
+    <p>
+      실제 지도 결과를 바탕으로 검증된 입시 컨설팅 성과입니다.<br>
+      고등학교 진학부터 이공계 대학 진학까지, 학생별 강점에 맞춘 전략으로 결과를 만들었습니다.
+    </p>
+  </header>
+
+  <section class="summary">
+    <div class="summary-box">
+      <strong>11</strong>
+      <span>고등학교 합격</span>
+    </div>
+    <div class="summary-box">
+      <strong>10</strong>
+      <span>대학교 합격</span>
+    </div>
+    <div class="summary-box">
+      <strong>UNIST</strong>
+      <span>합격 사례 포함</span>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="grid">
+
+      <div class="card">
+        <h2>🏫 고등학교 진학</h2>
+        <div class="result-list">
+          ✔ <b>과학고등학교</b> 합격 6명<br>
+          ✔ <b>마이스터고등학교</b> 합격 3명<br>
+          ✔ <b>한국디지털미디어고등학교</b> 합격 1명<br>
+          ✔ <b>애월고등학교 미술과</b> 합격 1명
+        </div>
+        <div class="highlight-box">
+          다양한 진로에 맞춘 맞춤형 입시 전략
+          <span>과학고 · 마이스터고 · 디미고 · 예술계열까지 지도</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>🎓 대학교 진학</h2>
+        <div class="result-list">
+          ✔ <b>울산과학기술원 UNIST</b> 합격 1명<br>
+          ✔ <b>중앙대학교</b> 합격 4명<br>
+          ✔ <b>숭실대학교</b> 합격 2명<br>
+          ✔ <b>한국교원대학교 컴퓨터교육</b> 합격 1명<br>
+          ✔ <b>과기대</b> 합격 2명
+        </div>
+        <div class="highlight-box">
+          🎯 UNIST 합격 사례 포함
+          <span>연구 기반 포트폴리오 전략으로 달성</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="unist-card">
+      <h2>성적이 아닌 연구로 도달한 UNIST</h2>
+      <p>
+        단순한 성적 경쟁이 아니라, 학생의 연구 경험과 프로젝트 수행 과정을 정리하여
+        AI·SW 분야의 성장 가능성을 보여주는 포트폴리오를 설계했습니다.
+        특히 일반고 학생이 자신의 약점을 연구 역량으로 보완할 수 있도록
+        자기소개서와 입증자료를 하나의 스토리로 연결했습니다.
+      </p>
+      <div class="unist-tag">
+        GPA를 넘어 연구로 증명한 AI 인재
+      </div>
+    </div>
+
+  </section>
+
+</body>
+</html>

@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>코딩 교재 출판</title>
+
+<style>
+*{box-sizing:border-box}
+/* NAV */
+nav{position:sticky;top:0;left:0;right:0;z-index:200;width:100%;background:#151a20;border-bottom:1px solid rgba(255,255,255,0.08)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;max-width:1120px;margin:0 auto;padding:0 32px;height:76px}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:300;letter-spacing:5px;text-transform:uppercase;color:rgba(255,255,255,0.72);text-decoration:none}
+.back-link{display:inline-block;padding:15px 19px;border:1px solid rgba(255,255,255,0.14);color:rgba(255,255,255,0.52);text-decoration:none;font-size:11px;font-weight:700;letter-spacing:4px;text-transform:uppercase;transition:.2s}
+.back-link:hover{color:#fff;border-color:rgba(255,255,255,0.35);background:rgba(255,255,255,0.04)}
+.hamburger{display:flex;flex-direction:column;justify-content:center;gap:5px;width:36px;height:36px;cursor:pointer;padding:6px;border:0.5px solid rgba(255,255,255,0.15);background:transparent;transition:.2s;flex-shrink:0}
+.hamburger:hover{background:rgba(255,255,255,0.08)}
+.hamburger span{display:block;height:0.5px;background:rgba(255,255,255,0.7);transition:.25s}
+.hamburger:hover span{background:#fff}
+.hamburger.open span:nth-child(1){transform:translateY(5.5px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.hamburger.open span:nth-child(3){transform:translateY(-5.5px) rotate(-45deg)}
+.nav-drawer{position:fixed;top:58px;right:0;width:260px;background:#0D1117;border-left:0.5px solid rgba(255,255,255,0.07);border-bottom:0.5px solid rgba(255,255,255,0.07);transform:translateX(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);z-index:199}
+.nav-drawer.open{transform:translateX(0)}
+.nav-drawer a{display:block;padding:16px 28px;font-size:11px;font-weight:400;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.45);border-bottom:0.5px solid rgba(255,255,255,0.07);transition:.15s}
+.nav-drawer a:last-child{border-bottom:none}
+.nav-drawer a:hover,.nav-drawer a.on{background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.9)}
+.nav-overlay{display:none;position:fixed;inset:0;z-index:198;background:rgba(42,39,34,0.25)}
+
+body{
+  margin:0;
+  font-family:'Noto Sans KR', Arial, sans-serif;
+  background:#F2EFE9;
+  color:#222;
+}
+
+.page{
+  max-width:1120px;
+  margin:0 auto;
+  padding:48px 24px 70px;
+}
+
+.top{
+  margin-bottom:34px;
+}
+
+.eyebrow{
+  font-size:12px;
+  letter-spacing:3px;
+  color:#8A6A2F;
+  font-weight:700;
+  margin-bottom:10px;
+}
+
+h1{
+  margin:0;
+  font-size:clamp(40px, 4.2vw, 52px);
+  line-height:1.18;
+  letter-spacing:-1.5px;
+  font-weight:800;
+}
+
+.desc{
+  margin-top:16px;
+  color:#777;
+  font-size:clamp(15px, 1.25vw, 18px);
+  line-height:1.75;
+}
+
+.stat-row{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1px;
+  background:#ddd7ce;
+  border:1px solid #ddd7ce;
+  margin:clamp(30px, 4vw, 44px) 0 clamp(34px, 4vw, 48px);
+}
+
+.stat{
+  background:#fffaf2;
+  padding:clamp(24px, 3.2vw, 38px) 16px;
+  text-align:center;
+}
+
+.stat strong{
+  display:block;
+  font-size:clamp(34px, 4vw, 46px);
+  line-height:1.15;
+  margin-bottom:8px;
+  font-weight:800;
+}
+
+.stat span{
+  font-size:clamp(13px, 1.1vw, 16px);
+  color:#777;
+}
+
+/* 핵심: 3~4개 반응형 카드 */
+.book-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+  gap:20px;
+}
+
+/* 큰 화면에서는 최대 4개 */
+@media (min-width:1000px){
+  .book-grid{
+    grid-template-columns:repeat(4, 1fr);
+  }
+}
+
+/* 중간 화면에서는 3개 */
+@media (min-width:760px) and (max-width:999px){
+  .book-grid{
+    grid-template-columns:repeat(3, 1fr);
+  }
+}
+
+/* 작은 화면에서는 2개 */
+@media (min-width:480px) and (max-width:759px){
+  .book-grid{
+    grid-template-columns:repeat(2, 1fr);
+  }
+}
+
+/* 아주 작은 화면에서는 1개 */
+@media (max-width:479px){
+  .book-grid{
+    grid-template-columns:1fr;
+  }
+}
+
+.book-card{
+  background:#fff;
+  border:1px solid #dedbd4;
+  border-radius:14px;
+  overflow:hidden;
+  box-shadow:0 4px 14px rgba(0,0,0,0.05);
+  transition:.2s;
+}
+
+.book-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 8px 22px rgba(0,0,0,0.09);
+}
+
+.cover{
+  height:350px;
+  background:#efeee8;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#aaa;
+  font-size:13px;
+  text-align:center;
+  padding:12px;
+}
+
+/* 이미지 넣을 때 사용 */
+.cover img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+.info{
+  padding:16px 16px 14px;
+}
+
+.tag{
+  display:inline-block;
+  padding:4px 9px;
+  border-radius:999px;
+  font-size:11px;
+  font-weight:700;
+  margin-bottom:9px;
+}
+
+.scratch{background:#e3f3d8;color:#487336}
+.python{background:#dcecff;color:#265f98}
+.java{background:#ffe6c7;color:#8a5a18}
+
+.title{
+  font-size:15px;
+  font-weight:800;
+  line-height:1.45;
+  margin-bottom:8px;
+  min-height:43px;
+}
+
+.meta{
+  font-size:12px;
+  color:#666;
+  line-height:1.55;
+  margin-bottom:10px;
+}
+
+.bottom{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-size:13px;
+}
+
+.price{
+  font-weight:800;
+}
+
+.date{
+  color:#777;
+  font-size:12px;
+}
+
+.links{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  border-top:1px solid #eee;
+}
+
+.links a{
+  display:block;
+  text-align:center;
+  padding:11px 4px;
+  text-decoration:none;
+  color:#333;
+  font-size:12px;
+  font-weight:700;
+}
+
+.links a:first-child{
+  border-right:1px solid #eee;
+}
+
+.links a:hover{
+  background:#f6f3ed;
+}
+
+.back{
+  display:inline-block;
+  margin-bottom:26px;
+  color:#555;
+  text-decoration:none;
+  font-size:13px;
+}
+
+.back:hover{
+  color:#000;
+}
+
+.note{
+  margin-top:26px;
+  color:#888;
+  font-size:12px;
+  line-height:1.7;
+}
+@media (max-width:700px){
+  .nav-inner{height:66px;padding:0 20px}
+  .nav-logo{font-size:13px;letter-spacing:4px}
+  .back-link{padding:12px 14px;font-size:10px;letter-spacing:2.5px}
+  .page{padding:36px 20px 60px}
+  .stat-row{grid-template-columns:1fr}
+}
+
+</style>
+</head>
+
+<body>
+  <nav>
+    <div class="nav-inner">
+      <a class="nav-logo" href="portfolio_index.html">Lee · Eunjin</a>
+      <a class="back-link" href="portfolio_index.html">Portfolio Home</a>
+    </div>
+  </nav>
+
+  <main class="page">
+    <section class="top">
+      <div class="eyebrow">CODING TEXTBOOK AUTHOR</div>
+      <h1>코딩 교재 출판</h1>
+      <p class="desc">
+        YBM IT COS · COS Pro 주교재로 홈페이지 등록 예정인 코딩 교재입니다.<br>
+        교보문고와 YES24에 총 7권이 제작되어 판매되고 있습니다.
+      </p>
+    </section>
+
+    <section class="stat-row">
+      <div class="stat">
+        <strong>7</strong>
+        <span>출판 교재</span>
+      </div>
+      <div class="stat">
+        <strong>교보문고</strong>
+        <span>판매 플랫폼</span>
+      </div>
+      <div class="stat">
+        <strong>YES24</strong>
+        <span>판매 플랫폼</span>
+      </div>
+    </section>
+
+    <section class="book-grid">
+
+      <article class="book-card">
+        <div class="cover">
+          <img src="images/book1.jpg">
+        </div>
+        <div class="info">
+          <span class="tag scratch">스크래치</span>
+          <div class="title">스크래치 COS 2급 자격증</div>
+          <div class="meta">저 이은진 · 그림 이은경<br>감수 오수정 · 이해영</div>
+          <div class="bottom">
+            <span class="price">13,500원</span>
+            <span class="date">2026.04.18</span>
+          </div>
+        </div>
+        <div class="links">
+          <a href="https://ebook-product.kyobobook.co.kr/dig/epd/ebook/E000012865061" target="_blank">교보문고</a>
+          <a href="https://www.yes24.com/product/goods/187041151" target="_blank">YES24</a>
+        </div>
+      </article>
+
+      <article class="book-card">
+        <div class="cover">
+          <img src="images/book2.jpg">
+        </div>
+        <div class="info">
+          <span class="tag scratch">스크래치</span>
+          <div class="title">스크래치 COS 3급 자격증</div>
+          <div class="meta">저 이은진 · 그림 이은경<br>감수 오수정 · 이해영</div>
+          <div class="bottom">
+            <span class="price">13,500원</span>
+            <span class="date">2026.04.18</span>
+          </div>
+        </div>
+        <div class="links">
+          <a href="https://ebook-product.kyobobook.co.kr/dig/epd/ebook/E000012864921" target="_blank">교보문고</a>
+          <a href="https://www.yes24.com/product/goods/187041149" target="_blank">YES24</a>
+        </div>
+      </article>
+
+      <article class="book-card">
+        <div class="cover">
+          <img src="images/book3.jpg">
+        </div>
+        <div class="info">
+          <span class="tag python">Python</span>
+          <div class="title">Python COS Pro 3급 기본서</div>
+          <div class="meta">저 이은진 · 그림 이은경<br>감수 고지훈 · 이해영</div>
+          <div class="bottom">
+            <span class="price">19,800원</span>
+            <span class="date">2026.04.11</span>
+          </div>
+        </div>
+        <div class="links">
+          <a href="https://ebook-product.kyobobook.co.kr/dig/epd/ebook/E000012847344" target="_blank">교보문고</a>
+          <a href="https://www.yes24.com/product/goods/186533038" target="_blank">YES24</a>
+        </div>
+      </article>
+
+      <article class="book-card">
+        <div class="cover">
+          <img src="images/book4.jpg">
+        </div>
+        <div class="info">
+          <span class="tag python">Python</span>
+          <div class="title">2026 최신판 Python COS Pro 2급 수험서</div>
+          <div class="meta">저 이은진 · 그림 이은경<br>감수 고지훈 · 이해영</div>
+          <div class="bottom">
+            <span class="price">18,000원</span>
+            <span class="date">2026.04.18</span>
+          </div>
+        </div>
+        <div class="links">
+          <a href="https://ebook-product.kyobobook.co.kr/dig/epd/ebook/E000012872705" target="_blank">교보문고</a>
+          <a href="https://www.yes24.com/product/goods/187516252" target="_blank">YES24</a>
+        </div>
+      </article>
+
+      <article class="book-card">
+        <div class="cover">
+          <img src="images/book5.jpg">
+        </div>
+        <div class="info">
+          <span class="tag java">Java</span>
+          <div class="title">Java COS Pro 3급 기본서</div>
+          <div class="meta">저 이은진 · 그림 이은경<br>감수 고지훈 · 이해영</div>
+          <div class="bottom">
+            <span class="price">19,800원</span>
+            <span class="date">2026.04.11</span>
+          </div>
+        </div>
+        <div class="links">
+          <a href="https://ebook-product.kyobobook.co.kr/dig/epd/ebook/E000012851238" target="_blank">교보문고</a>
+          <a href="https://www.yes24.com/product/goods/186684553" target="_blank">YES24</a>
+        </div>
+      </article>
+
+      <article class="book-card">
+        <div class="cover">
+          <img src="images/book6.jpg">
+        </div>
+        <div class="info">
+          <span class="tag java">Java</span>
+          <div class="title">2026 최신판 Java COS Pro 2급 수험서</div>
+          <div class="meta">저 이은진 · 그림 이은경<br>감수 고지훈 · 이해영</div>
+          <div class="bottom">
+            <span class="price">18,000원</span>
+            <span class="date">2026.04.18</span>
+          </div>
+        </div>
+        <div class="links">
+          <a href="https://ebook-product.kyobobook.co.kr/dig/epd/ebook/E000012871211" target="_blank">교보문고</a>
+          <a href="https://www.yes24.com/product/goods/187312414" target="_blank">YES24</a>
+        </div>
+      </article>
+
+      <article class="book-card">
+        <div class="cover">
+          <img src="images/book7.jpg">
+        </div>
+        <div class="info">
+          <span class="tag python">C++</span>
+          <div class="title">C++ COS Pro 3급 기본서</div>
+          <div class="meta">저 이은진 · 그림 이은경<br>감수 고지훈 · 이해영</div>
+          <div class="bottom">
+            <span class="price">19,800원</span>
+            <span class="date">2026.04.11</span>
+          </div>
+        </div>
+        <div class="links">
+          <a href="https://ebook-product.kyobobook.co.kr/dig/epd/ebook/E000012847322" target="_blank">교보문고</a>
+          <a href="https://www.yes24.com/product/goods/186532974" target="_blank">YES24</a>
+        </div>
+      </article>
+
+    </section>
+
+    <p class="note">
+      ※ 표지 이미지는 images 폴더에 넣은 뒤, 각 카드의 cover 영역에 &lt;img src="images/book1.jpg"&gt; 형식으로 연결하면 됩니다.
+    </p>
+  </main>
+</body>
+</html>

@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>입시 컨설팅 | AI·코딩 포트폴리오</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+/* NAV */
+nav{position:sticky;top:0;left:0;right:0;z-index:200;width:100%;background:#151a20;border-bottom:1px solid rgba(255,255,255,0.08)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;max-width:1120px;margin:0 auto;padding:0 32px;height:76px}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:300;letter-spacing:5px;text-transform:uppercase;color:rgba(255,255,255,0.72);text-decoration:none}
+.back-link{display:inline-block;padding:15px 19px;border:1px solid rgba(255,255,255,0.14);color:rgba(255,255,255,0.52);text-decoration:none;font-size:11px;font-weight:700;letter-spacing:4px;text-transform:uppercase;transition:.2s}
+.back-link:hover{color:#fff;border-color:rgba(255,255,255,0.35);background:rgba(255,255,255,0.04)}
+.hamburger{display:flex;flex-direction:column;justify-content:center;gap:5px;width:36px;height:36px;cursor:pointer;padding:6px;border:0.5px solid rgba(255,255,255,0.15);background:transparent;transition:.2s;flex-shrink:0}
+.hamburger:hover{background:rgba(255,255,255,0.08)}
+.hamburger span{display:block;height:0.5px;background:rgba(255,255,255,0.7);transition:.25s}
+.hamburger:hover span{background:#fff}
+.hamburger.open span:nth-child(1){transform:translateY(5.5px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.hamburger.open span:nth-child(3){transform:translateY(-5.5px) rotate(-45deg)}
+.nav-drawer{position:fixed;top:58px;right:0;width:260px;background:#0D1117;border-left:0.5px solid rgba(255,255,255,0.07);border-bottom:0.5px solid rgba(255,255,255,0.07);transform:translateX(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);z-index:199}
+.nav-drawer.open{transform:translateX(0)}
+.nav-drawer a{display:block;padding:16px 28px;font-size:11px;font-weight:400;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.45);border-bottom:0.5px solid rgba(255,255,255,0.07);transition:.15s}
+.nav-drawer a:last-child{border-bottom:none}
+.nav-drawer a:hover,.nav-drawer a.on{background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.9)}
+.nav-overlay{display:none;position:fixed;inset:0;z-index:198;background:rgba(42,39,34,0.25)}
+body {
+    margin: 0;
+    font-family: 'Pretendard', 'Noto Sans KR', Arial, sans-serif;
+    background: #080d16;
+    color: #ffffff;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* 상단 메인 */
+.hero {
+    min-height: 100vh;
+    background: radial-gradient(circle at center, #172238 0%, #080d16 55%, #030712 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.hero-inner {
+    max-width: 1000px;
+}
+
+.top-text {
+    font-size: 12px;
+    letter-spacing: 6px;
+    color: #6b7280;
+    margin-bottom: 42px;
+}
+
+.hero h1 {
+    font-size: 72px;
+    line-height: 1.15;
+    margin: 0;
+    font-weight: 900;
+}
+
+.hero h1 span {
+    display: block;
+    color: #8b9099;
+}
+
+.line {
+    width: 48px;
+    height: 1px;
+    background: #4b5563;
+    margin: 36px auto;
+}
+
+.main-slogan {
+    font-size: 28px;
+    font-weight: 700;
+    color: #e5e7eb;
+    margin-bottom: 14px;
+}
+
+.sub-slogan {
+    font-size: 19px;
+    color: #9ca3af;
+    line-height: 1.7;
+}
+
+.sub-slogan strong {
+    color: #38bdf8;
+}
+
+.buttons {
+    margin-top: 44px;
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 14px 28px;
+    border: 1px solid #4b5563;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.04);
+    font-size: 18px;
+    font-weight: 700;
+    transition: 0.25s;
+}
+
+.btn:hover {
+    background: #38bdf8;
+    color: #020617;
+    border-color: #38bdf8;
+}
+
+/* 공통 섹션 */
+.section {
+    padding: 90px 9%;
+}
+
+.section-title {
+    font-size: 36px;
+    margin-bottom: 18px;
+}
+
+.section-desc {
+    color: #9ca3af;
+    font-size: 18px;
+    line-height: 1.8;
+    margin-bottom: 40px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+}
+
+.card {
+    background: linear-gradient(145deg, #111827, #0f172a);
+    border: 1px solid #1f2937;
+    border-radius: 24px;
+    padding: 30px;
+    min-height: 230px;
+}
+
+.card h3 {
+    margin-top: 0;
+    font-size: 23px;
+    color: #ffffff;
+}
+
+.card p {
+    color: #cbd5e1;
+    line-height: 1.75;
+    font-size: 16px;
+}
+
+/* 스토리 */
+.story {
+    background: #0f172a;
+}
+
+.timeline {
+    display: grid;
+    gap: 18px;
+}
+
+.timeline-item {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 24px;
+    padding: 26px;
+    border-radius: 20px;
+    background: #111827;
+    border: 1px solid #263244;
+}
+
+.timeline-year {
+    color: #38bdf8;
+    font-weight: 800;
+    font-size: 20px;
+}
+
+.timeline-content {
+    color: #d1d5db;
+    line-height: 1.8;
+}
+
+/* 강조 박스 */
+.highlight {
+    background: linear-gradient(135deg, #0f172a, #172554);
+    border-top: 1px solid #1e3a8a;
+    border-bottom: 1px solid #1e3a8a;
+    text-align: center;
+}
+
+.highlight h2 {
+    font-size: 42px;
+    margin-bottom: 20px;
+}
+
+.highlight p {
+    font-size: 20px;
+    color: #dbeafe;
+    line-height: 1.8;
+}
+
+/* 자료 영역 */
+.material-list {
+    display: grid;
+    gap: 18px;
+}
+
+.material {
+    padding: 24px 28px;
+    background: #111827;
+    border: 1px solid #263244;
+    border-radius: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.material b {
+    font-size: 19px;
+}
+
+.material span {
+    color: #9ca3af;
+    font-size: 15px;
+}
+
+/* 하단 */
+.footer {
+    padding: 50px 20px;
+    text-align: center;
+    color: #6b7280;
+    background: #030712;
+}
+
+.back-btn {
+    display: inline-block;
+    margin-top: 28px;
+    padding: 13px 26px;
+    border-radius: 999px;
+    border: 1px solid #4b5563;
+    font-weight: 700;
+}
+
+.back-btn:hover {
+    background: white;
+    color: #020617;
+}
+
+/* 반응형 */
+@media (max-width: 900px) {
+    .hero h1 {
+        font-size: 48px;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .timeline-item {
+        grid-template-columns: 1fr;
+    }
+
+    .material {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+}
+</style>
+</head>
+
+<body>
+  <nav>
+    <div class="nav-inner">
+      <a class="nav-logo" href="portfolio_index.html">Lee · Eunjin</a>
+      <a class="back-link" href="portfolio_index.html">Portfolio Home</a>
+    </div>
+  </nav>
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-inner">
+        <div class="top-text">LEE EUNJIN · AI · CODING CONSULTING PORTFOLIO 2026</div>
+
+        <h1>
+            입시 컨설팅
+            <span>UNIST 합격 스토리</span>
+        </h1>
+
+        <div class="line"></div>
+
+        <div class="main-slogan">
+            GPA를 넘어 연구로 증명한 AI 인재
+        </div>
+
+        <div class="sub-slogan">
+            성적이 아닌 연구로 도달한 <strong>UNIST</strong><br>
+            From GPA 2.6 to AI Research @ UNIST
+        </div>
+
+        <div class="buttons">
+            <a href="#story" class="btn">합격 스토리</a>
+            <a href="#strategy" class="btn">컨설팅 전략</a>
+            <a href="#materials" class="btn">제출 자료</a>
+            <a href="portfolio_index.html" class="btn">메인으로</a>
+        </div>
+    </div>
+</section>
+
+<!-- OVERVIEW -->
+<section class="section">
+    <h2 class="section-title">자기소개서 핵심 내용을 반영한 UNIST 입시 포트폴리오</h2>
+    <p class="section-desc">
+        단순한 성적 보완이 아니라, 청각장애인의 발음 교정 문제에서 출발한
+        AI 연구 경험과 UNIST 입학 후 컴퓨터 비전 연구 계획이 하나의 성장 서사로
+        연결되도록 포트폴리오를 재구성했습니다.
+    </p>
+
+    <div class="grid">
+        <div class="card">
+            <h3>소리오름 연구 동기</h3>
+            <p>
+                청각장애 환자의 의사소통 한계를 해결하고자 음성, 안면 근육 움직임,
+                컴퓨터 비전을 결합한 발음 교정 연구의 출발점을 강조했습니다.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>Face Mesh 기반 분석</h3>
+            <p>
+                478개 얼굴 좌표 중 발음과 관련된 145개 특징점을 선별하고,
+                Embedding 모델과 CTC 기반 E2E 음성 인식으로 기술적 깊이를 보여주었습니다.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>UNIST 연구 확장성</h3>
+            <p>
+                인간 행동·자세 인식, 3차원 복원, Weakly-Supervised 도메인 적응,
+                생성 모델 연구로 확장되는 학업 계획을 중심 메시지로 정리했습니다.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- STORY -->
+<section class="section story" id="story">
+    <h2 class="section-title">UNIST 합격까지의 성장 스토리</h2>
+    <p class="section-desc">
+        핵심은 “성적이 낮았지만 합격했다”가 아니라,
+        “성적 이상의 연구 역량을 증명했다”는 점입니다.
+    </p>
+
+    <div class="timeline">
+        <div class="timeline-item">
+            <div class="timeline-year">STEP 01</div>
+            <div class="timeline-content">
+                일반고 내신 2.6이라는 현실을 인정하고, 성적만으로 설명되지 않는
+                연구 경험과 문제 해결 과정을 포트폴리오의 중심에 배치했습니다.
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-year">STEP 02</div>
+            <div class="timeline-content">
+                청각장애 환자의 발음 어려움에 공감한 경험을 바탕으로,
+                사람의 기본권과 의사소통을 돕는 AI 연구 방향을 설정했습니다.
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-year">STEP 03</div>
+            <div class="timeline-content">
+                Face Mesh 478개 좌표 중 발음 관련 145개 특징점을 선별하고,
+                Embedding 기반 모델에서 79% 해석 정확도를 확인한 과정을 강조했습니다.
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-year">STEP 04</div>
+            <div class="timeline-content">
+                Flask 웹 환경, CTC 기반 E2E 음성 인식, 즉시 피드백 구조를 연결해
+                연구가 실제 서비스 가능성까지 이어졌음을 보여주었습니다.
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- STRATEGY -->
+<section class="section" id="strategy">
+    <h2 class="section-title">입시 컨설팅 핵심 전략</h2>
+    <p class="section-desc">
+        단순한 활동 나열이 아니라, 대학이 읽었을 때 학생의 방향성과 가능성이
+        선명하게 보이도록 자료를 재구성합니다.
+    </p>
+
+    <div class="grid">
+        <div class="card">
+            <h3>01. 약점의 재해석</h3>
+            <p>
+                낮은 내신을 단순 약점으로 두지 않고,
+                사회 문제를 발견하고 AI로 해결하려는 연구 태도의 출발점으로 전환합니다.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>02. 연구 흐름 정리</h3>
+            <p>
+                문제 인식 → 특징점 선별 → 모델 비교 → 웹 구현 → 사회적 활용 가능성의
+                흐름으로 연구 경험을 정리합니다.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>03. 증빙자료 연결</h3>
+            <p>
+                고등학교 연구 경험과 UNIST 입학 후 컴퓨터 비전·딥러닝 학업 계획이
+                자연스럽게 이어지도록 자료를 연결합니다.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- HIGHLIGHT -->
+<section class="section highlight">
+    <h2>성적이 아닌 연구로 도달한 UNIST</h2>
+    <p>
+        이 포트폴리오는 결과만 보여주는 자료가 아니라,<br>
+        학생이 어떤 사회 문제를 발견했고, 어떤 AI 기술로 접근했으며,<br>
+        UNIST에서 어떤 연구자로 성장할지를 보여주는 성장 기록입니다.
+    </p>
+</section>
+
+<!-- MATERIALS -->
+<section class="section" id="materials">
+    <h2 class="section-title">제출 자료 구성</h2>
+    <p class="section-desc">
+        아래 항목은 실제 제출 자료와 연결할 수 있는 영역입니다.
+        PDF 파일명을 맞추면 버튼 클릭으로 바로 열리도록 구성할 수 있습니다.
+    </p>
+
+    <div class="material-list">
+        <div class="material">
+            <div>
+                <b>자기소개서 1번 </b><br>
+                <span>UNIST 지원 동기 · 소리오름 연구 · 발음 교정 AI</span>
+            </div>
+            <a href="pdf/consul/유니스트 자기소개서 _1번.pdf" class="back-btn">PDF 연결</a>
+        </div>
+
+        <div class="material">
+            <div>
+                <b>자기소개서 2번</b><br>
+                <span>입학 후 학업계획 · 컴퓨터 비전 · 딥러닝 · 진로 계획</span>
+            </div>
+            <a href="pdf/consul/유니스트 자기소개서 _2번.pdf" class="back-btn">PDF 연결</a>
+        </div>
+
+        <div class="material">
+            <div>
+                <b>1. 자기평가서 : 소리오름 연구 동기</b><br>
+                <span>청각장애 환자의 의사소통 한계를 해결하고자 음성, 안면 근육 움직임,
+                컴퓨터 비전을 결합한 발음 교정 연구의 출발점을 강조했습니다.</span>
+            </div>
+            <a href="pdf/consul/1. 자기평가서.pdf" class="back-btn">PDF 연결</a>
+        </div>
+
+        <div class="material">
+            <div>
+                <b>2. 자기평가서 : Face Mesh 기반 분석</b><br>
+                <span>478개 얼굴 좌표 중 발음과 관련된 145개 특징점을 선별하고,
+                Embedding 모델과 CTC 기반 E2E 음성 인식으로 기술적 깊이를 보여주었습니다.</span>
+            </div>
+            <a href="pdf/consul/2. 자기평가서.pdf" class="back-btn">PDF 연결</a>
+        </div>
+        <div class="material">
+            <div>
+                <b>3. 자기평가서 : UNIST 연구 확장성</b><br>
+                <span>인간 행동·자세 인식, 3차원 복원, Weakly-Supervised 도메인 적응,
+                생성 모델 연구로 확장되는 학업 계획을 중심 메시지로 정리했습니다.</span>
+            </div>
+            <a href="pdf/consul/3. 자기평가서.pdf" class="back-btn">PDF 연결</a>
+        </div>
+        <div class="material">
+            <div>
+                <b>기타 입증자료</b><br>
+                <span>자기평가서를 입증할 수 있는 5매의 입증자료</span>
+            </div>
+            <a href="pdf/consul/기타입증자료.pdf" class="back-btn">PDF 연결</a>
+        </div>
+    </div>
+</section>
+
+
+
+</body>
+</html>
