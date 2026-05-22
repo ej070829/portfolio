@@ -118,6 +118,51 @@ nav{position:sticky;top:0;z-index:200;background:rgba(13,17,23,0.96);backdrop-fi
   font-size:18px;font-weight:700;letter-spacing:-0.5px;
   color:#ffffff;line-height:1;
 }
+.desc {
+  color: rgba(255,255,255,0.72);
+  font-size: clamp(16px, 2vw, 22px);
+  line-height: 1.8;
+  margin: 34px auto 28px;
+  max-width: 760px;
+  word-break: keep-all;
+}
+  
+.line {
+  width: 40px;
+  height: 1px;
+  background: rgba(255,255,255,0.18);
+  margin: 36px auto 44px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin: 0 auto;
+  max-width: 960px;
+}
+
+.card {
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 28px;
+  background: rgba(255,255,255,0.055);
+  padding: 28px 22px;
+  backdrop-filter: blur(8px);
+  transition: 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.36);
+}
+
+.card h2 {
+  font-size: 25px;
+  margin-bottom: 12px;
+  font-weight: 800;
+}
+
 @media(max-width:600px){
   .hero-stat{padding:12px 20px;}
   .hero-stat-label{font-size:15px;}
@@ -326,25 +371,30 @@ footer{background:var(--ink);padding:28px 48px;border-top:0.5px solid var(--line
       <em>컨설팅</em>
     </div>
 
-    <div class="hero-divider"></div>
-    <div class="hero-stats">
-      <div class="hero-stat">
-        <div class="hero-stat-label" ><a href="korea-code-fair.html">한국코드페어</a></div>
-      </div>
-      <div class="hero-stat">
-        <div class="hero-stat-label"><a href="isef_international_page/isef-track.html">국제대회[ISFE]</a></div>
-      </div>
-      <div class="hero-stat">
-        <div class="hero-stat-label"><a href="books_responsive.html">교재 출판</a></div>
-      </div>
-      <div class="hero-stat">
-        <div class="hero-stat-label"><a href="research-paper-guidance.html">소논문 컨설팅</a></div>
-      </div>
-      <div class="hero-stat">
-        <div class="hero-stat-label"><a href="consulting.html">입시 컨설팅</a></div>
-      </div>
+       <p class="desc">
+          초등 전국대회부터 중등 특목·국제학교 준비, 고등 생기부 컨설팅까지<br />
+          학생의 아이디어를 프로젝트와 입시 포트폴리오로 연결합니다.
+        </p>
 
-    </div>
+        <div class="line"></div>
+
+        <div class="cards">
+          <div class="card">
+            <h2>초등부</h2>
+            <p>한국코드페어·전국대회 준비<br />아이디어 발굴부터 작품 제작, 발표까지</p>
+          </div>
+
+          <div class="card">
+            <h2>중등부</h2>
+            <p>디미고·과학고·국제학교 준비<br />AI 프로젝트와 자기소개서 방향 설계</p>
+          </div>
+
+          <div class="card">
+            <h2>고등부</h2>
+            <p>생기부·세특·대입 컨설팅<br />전공 적합성과 탐구 스토리 구성</p>
+          </div>
+        </div>
+
   </div>
 
   <div class="scroll-indicator">
