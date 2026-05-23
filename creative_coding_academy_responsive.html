@@ -140,40 +140,57 @@ a   { color: inherit; text-decoration: none; }
 .section-header { margin-bottom:28px; }
 
 /* ─────────────────────────────────────────
-   COURSES GRID
+   COURSES — FULL-WIDTH STACKED ROWS
 ───────────────────────────────────────── */
 .courses-grid {
-  display:grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%,340px),1fr));
-  gap:20px;
+  display:flex; flex-direction:column; gap:24px;
 }
 .course-card {
   border-radius:var(--r); overflow:hidden;
   border:1px solid var(--border); background:#fff;
+  display:grid;
+  grid-template-columns: 260px 1fr;
 }
 .course-card-header {
-  background:var(--navy); padding:18px 22px;
+  background:var(--navy); padding:32px 28px;
+  display:flex; flex-direction:column; justify-content:center;
 }
 .course-card-header.green-hd { background:var(--green); }
 .course-track {
   font-family:'Montserrat',sans-serif;
-  font-size: 11px; font-weight:700;
-  letter-spacing:2px; color:rgba(255,255,255,.5);
-  text-transform:uppercase; margin-bottom:5px;
+  font-size: 10px; font-weight:700;
+  letter-spacing:2.5px; color:rgba(255,255,255,.5);
+  text-transform:uppercase; margin-bottom:10px;
 }
 .course-card-title {
-  color:#fff; font-size: clamp(16px,2.5vw,18px);
-  font-weight:800; letter-spacing:-.3px;
+  color:#fff; font-size: clamp(22px,2.8vw,30px);
+  font-weight:900; letter-spacing:-.5px; line-height:1.2;
 }
 .course-card-title span {
-  display:block; font-size: 13px; font-weight:500;
-  color:rgba(255,255,255,.6); margin-top:3px;
+  display:block; font-size: 13px; font-weight:400;
+  color:rgba(255,255,255,.55); margin-top:8px; letter-spacing:0;
 }
-.course-card-body { padding:20px 22px; }
+.course-card-body {
+  padding:28px 32px;
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:20px 32px;
+  align-content:start;
+}
 .course-goal {
-  font-size: 14px; color:#5A6478; line-height:1.7;
-  margin-bottom:18px; padding-bottom:16px;
+  font-size: 13.5px; color:#5A6478; line-height:1.75;
+  grid-column: 1 / -1;
+  padding-bottom:16px;
   border-bottom:1px solid #EEF0F6;
+}
+.flow-wrap  { grid-column: 1 / -1; }
+.bullet-col { grid-column: 1 / -1; }
+
+/* 태블릿 이하 */
+@media (max-width: 860px) {
+  .course-card { grid-template-columns: 1fr; }
+  .course-card-header { padding:22px; }
+  .course-card-body { grid-template-columns:1fr; padding:20px 22px; gap:16px; }
 }
 
 /* flow steps */
@@ -470,8 +487,90 @@ tbody tr:nth-child(even) td { background:#FAFBFF; }
 .contact-line strong { color:#fff; font-weight:700; }
 
 /* ─────────────────────────────────────────
-   SCROLL ANIMATIONS
+   RECRUIT BANNER
 ───────────────────────────────────────── */
+.recruit-banner {
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  padding: clamp(24px,4vw,36px) var(--px);
+}
+.recruit-inner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 24px;
+  align-items: center;
+}
+.recruit-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--navy);
+  color: var(--gold-light);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  padding: 6px 16px; border-radius: 20px;
+  margin-bottom: 14px;
+}
+.recruit-title {
+  font-size: clamp(22px,3vw,30px);
+  font-weight: 800; color: var(--navy);
+  letter-spacing: -.5px; line-height: 1.3;
+  margin-bottom: 14px;
+}
+.recruit-title em { font-style: normal; color: var(--gold); }
+.recruit-langs {
+  display: flex; gap: 8px; flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+.lang-chip {
+  background: var(--navy);
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px; font-weight: 700;
+  padding: 6px 18px; border-radius: 6px;
+  letter-spacing: .5px;
+}
+.recruit-sub {
+  font-size: 15px; color: var(--gray); line-height: 1.65;
+}
+.recruit-contact {
+  display: flex; flex-direction: column;
+  gap: 0; align-items: stretch;
+  flex-shrink: 0; min-width: 280px;
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  overflow: hidden;
+  background: #fff;
+}
+.recruit-contact-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 11px 18px;
+  border-bottom: 1px solid #F0F3F9;
+}
+.recruit-contact-item:last-child { border-bottom: none; }
+.recruit-contact-label {
+  font-size: 13px; font-weight: 700;
+  color: var(--gold);
+  min-width: 36px; flex-shrink: 0;
+}
+.recruit-contact-value {
+  font-size: 15px; font-weight: 600; color: var(--navy);
+}
+.recruit-divider { display: none; }
+.recruit-tags {
+  display: flex; gap: 8px; flex-wrap: wrap; margin-top: 2px;
+}
+.recruit-tag {
+  font-size: 12px; font-weight: 600; color: var(--green);
+  background: #F0FFF4; padding: 3px 10px; border-radius: 5px;
+  border: 1px solid #C6F0D8;
+}
+@media (max-width: 640px) {
+  .recruit-inner { grid-template-columns: 1fr; }
+  .recruit-contact { align-items: flex-start; }
+  .recruit-contact-item { text-align: left; }
+}
 .fade-up {
   opacity:0; transform:translateY(24px);
   transition: opacity .55s ease, transform .55s ease;
@@ -498,7 +597,6 @@ tbody tr:nth-child(even) td { background:#FAFBFF; }
 
   .feat-item { font-size: 12px; padding:12px 6px; }
 
-  .courses-grid  { grid-template-columns:1fr; }
   .project-grid  { grid-template-columns:1fr; }
   .levels-grid   { grid-template-columns:1fr; }
 
@@ -534,8 +632,7 @@ tbody tr:nth-child(even) td { background:#FAFBFF; }
 <section class="hero">
   <div class="hero-eyebrow">Creative Coding Academy · Elementary Program</div>
   <h1 class="hero-title">전국대회·경시<br><em>전문 컨설팅</em></h1>
-  <br></br>
-  <p class="hero-sub">코드를 작성하고, 보고서를 만들고, 발표까지 완성합니다<br>코딩 · 알고리즘 · 발표 · 보고서까지 완성하는 통합 교육</p>
+  <p class="hero-sub">코딩 실력과 수학적 사고력을 갖춘 학생을 위한<br>전국대회·경시 특화 대회반 프로그램</p>
 </section>
 
 <!-- ══ FEATURES BAR ══ -->
@@ -545,6 +642,53 @@ tbody tr:nth-child(even) td { background:#FAFBFF; }
   <div class="feat-item">발표력 강화</div>
   <div class="feat-item">보고서 작성</div>
   <div class="feat-item">포트폴리오 완성</div>
+</div>
+
+<!-- ══ RECRUIT BANNER ══ -->
+<div class="recruit-banner fade-up">
+  <div class="recruit-inner">
+    <div>
+      <div class="recruit-badge">신청 자격 안내</div>
+      <div class="recruit-title">이 과정은 <em>대회반</em>입니다</div>
+      <div class="recruit-langs">
+        <span class="lang-chip">Python</span>
+        <span class="lang-chip">C++</span>
+        <span class="lang-chip">Java</span>
+      </div>
+      <div class="recruit-sub">위 언어 중 하나 이상을 학습한 학생만 신청 가능합니다.</div>
+    </div>
+    <div class="recruit-contact">
+      <div class="recruit-contact-item">
+        <div class="recruit-contact-label">대상</div>
+        <div class="recruit-contact-value" style="font-size:13px; font-weight:600;">Python / C++ / Java 학습 경험자 · 초등~중등</div>
+      </div>
+      <div class="recruit-divider"></div>
+      <div class="recruit-contact-item">
+        <div class="recruit-contact-label">모집</div>
+        <div class="recruit-contact-value" style="font-size:13px; font-weight:600;">상시 모집 (선발 테스트 진행)</div>
+      </div>
+      <div class="recruit-divider"></div>
+      <div class="recruit-contact-item">
+        <div class="recruit-contact-label">수업</div>
+        <div class="recruit-contact-value" style="font-size:13px; font-weight:600;">소수정예 팀 / 개인 맞춤 지도</div>
+      </div>
+      <div class="recruit-divider"></div>
+      <div class="recruit-contact-item">
+        <div class="recruit-contact-label">전화</div>
+        <div class="recruit-contact-value">010-5697-6560</div>
+      </div>
+      <div class="recruit-divider"></div>
+      <div class="recruit-contact-item">
+        <div class="recruit-contact-label">카톡</div>
+        <div class="recruit-contact-value" style="font-size:13px; font-weight:600;">creativecoding</div>
+      </div>
+      <div class="recruit-divider"></div>
+      <div class="recruit-contact-item">
+        <div class="recruit-contact-label">위치</div>
+        <div class="recruit-contact-value" style="font-size:13px; font-weight:600;">대치동 939-5</div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- ══ COURSES ══ -->
@@ -557,25 +701,30 @@ tbody tr:nth-child(even) td { background:#FAFBFF; }
 
   <div class="courses-grid">
 
-    <!-- 한국코드페어 -->
+    <!-- ── 한국코드페어 ── -->
     <div class="course-card fade-up">
       <div class="course-card-header">
         <div class="course-track">Project Track</div>
-        <div class="course-card-title">한국코드페어 프로젝트반
+        <div class="course-card-title">한국코드페어<br>프로젝트반
           <span>초등부 대상</span>
         </div>
       </div>
       <div class="course-card-body">
-        <p class="course-goal">기획·개발·발표·보고서까지 팀 프로젝트로<br>전국대회 진출을 목표로 합니다.</p>
 
-        <div class="flow-steps">
-          <div class="flow-step active-step">아이디어<br>발굴</div>
-          <div class="flow-step">기획 및<br>설계</div>
-          <div class="flow-step">개발<br>(Python/C++)</div>
-          <div class="flow-step">발표 및<br>시연</div>
-          <div class="flow-step">보고서<br>포트폴리오</div>
+        <p class="course-goal">기획·개발·발표·보고서까지 팀 프로젝트로 전국대회 진출을 목표로 합니다.</p>
+
+        <!-- 진행 플로우 -->
+        <div class="flow-wrap">
+          <div class="flow-steps">
+            <div class="flow-step active-step">아이디어<br>발굴</div>
+            <div class="flow-step">기획 및<br>설계</div>
+            <div class="flow-step">개발<br>(Python/C++)</div>
+            <div class="flow-step">발표 및<br>시연</div>
+            <div class="flow-step">보고서<br>포트폴리오</div>
+          </div>
         </div>
 
+        <!-- 프로젝트 유형 (좌) -->
         <div class="project-grid">
           <div class="project-item">
             <div class="project-item-title">AI 서비스 개발</div>
@@ -595,79 +744,90 @@ tbody tr:nth-child(even) td { background:#FAFBFF; }
           </div>
         </div>
 
+        <!-- 특징 (우) -->
         <ul class="bullet-list">
           <li>Python, C++ 기반 프로젝트 수업</li>
           <li>팀 협업을 통한 문제 해결력 향상</li>
           <li>발표 및 보고서 작성 집중 훈련</li>
           <li>한국코드페어 본선 진출 지원</li>
         </ul>
+
       </div>
     </div>
 
-    <!-- 수학·알고리즘 -->
+    <!-- ── 수학·알고리즘 ── -->
     <div class="course-card fade-up">
       <div class="course-card-header green-hd">
         <div class="course-track">Competition Track</div>
-        <div class="course-card-title">수학·알고리즘 경시반
+        <div class="course-card-title">수학·알고리즘<br>경시반
           <span>경시대회 · 정보올림피아드 대비</span>
         </div>
       </div>
       <div class="course-card-body">
-        <p class="course-goal">수학적 사고력과 알고리즘 문제해결 능력 강화!<br>경시대회 및 정보올림피아드 대비.</p>
 
-        <div class="levels-grid">
-          <div class="level-box">
-            <div class="level-header">
-              <div class="level-num">LEVEL 1</div>
-              <div class="level-name">사고력 수학</div>
+        <p class="course-goal">수학적 사고력과 알고리즘 문제해결 능력 강화! 경시대회 및 정보올림피아드 대비.</p>
+
+        <!-- 레벨 3단계 — 풀폭 -->
+        <div class="flow-wrap">
+          <div class="levels-grid">
+            <div class="level-box">
+              <div class="level-header">
+                <div class="level-num">LEVEL 1</div>
+                <div class="level-name">사고력 수학</div>
+              </div>
+              <div class="level-body">
+                <div class="level-item">규칙 찾기</div>
+                <div class="level-item">경우의 수</div>
+                <div class="level-item">논리 퍼즐</div>
+                <div class="level-item">수학적 사고력 기초</div>
+              </div>
             </div>
-            <div class="level-body">
-              <div class="level-item">규칙 찾기</div>
-              <div class="level-item">경우의 수</div>
-              <div class="level-item">논리 퍼즐</div>
-              <div class="level-item">수학적 사고력 기초</div>
+            <div class="level-box">
+              <div class="level-header lv2">
+                <div class="level-num">LEVEL 2</div>
+                <div class="level-name">알고리즘 기초</div>
+              </div>
+              <div class="level-body">
+                <div class="level-item">자료구조 기초</div>
+                <div class="level-item">탐색(DFS, BFS)</div>
+                <div class="level-item">벡터·트리</div>
+                <div class="level-item">그리디, DP 기초</div>
+              </div>
             </div>
-          </div>
-          <div class="level-box">
-            <div class="level-header lv2">
-              <div class="level-num">LEVEL 2</div>
-              <div class="level-name">알고리즘 기초</div>
-            </div>
-            <div class="level-body">
-              <div class="level-item">자료구조 기초</div>
-              <div class="level-item">탐색(DFS, BFS)</div>
-              <div class="level-item">벡터·트리</div>
-              <div class="level-item">그리디, DP 기초</div>
-            </div>
-          </div>
-          <div class="level-box">
-            <div class="level-header lv3">
-              <div class="level-num">LEVEL 3</div>
-              <div class="level-name">경시·올림피아드</div>
-            </div>
-            <div class="level-body">
-              <div class="level-item">정수론, 조합론</div>
-              <div class="level-item">기하, 수열</div>
-              <div class="level-item">KMO·KOI 대비</div>
-              <div class="level-item">실전 문제 풀이</div>
+            <div class="level-box">
+              <div class="level-header lv3">
+                <div class="level-num">LEVEL 3</div>
+                <div class="level-name">경시·올림피아드</div>
+              </div>
+              <div class="level-body">
+                <div class="level-item">정수론, 조합론</div>
+                <div class="level-item">기하, 수열</div>
+                <div class="level-item">KMO·KOI 대비</div>
+                <div class="level-item">실전 문제 풀이</div>
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="flow-steps" style="margin-bottom:18px;">
-          <div class="flow-step active-step green">문제 분석</div>
-          <div class="flow-step">알고리즘<br>설계</div>
-          <div class="flow-step">코드 구현</div>
-          <div class="flow-step">테스트<br>디버깅</div>
-          <div class="flow-step">최적화</div>
+        <!-- 알고리즘 플로우 — 풀폭 -->
+        <div class="flow-wrap">
+          <div class="flow-steps">
+            <div class="flow-step active-step green">문제 분석</div>
+            <div class="flow-step">알고리즘<br>설계</div>
+            <div class="flow-step">코드 구현</div>
+            <div class="flow-step">테스트<br>디버깅</div>
+            <div class="flow-step">최적화</div>
+          </div>
         </div>
 
-        <ul class="bullet-list">
+        <!-- 특징 — 풀폭 -->
+        <ul class="bullet-list bullet-col">
           <li>정보올림피아드 대비 (Python / C++)</li>
           <li>전국 경시대회 대비</li>
           <li>수학 + 알고리즘 통합 교육</li>
           <li>개인별 오답 분석 및 맞춤 피드백</li>
         </ul>
+
       </div>
     </div>
 
@@ -769,55 +929,6 @@ tbody tr:nth-child(even) td { background:#FAFBFF; }
     </div>
 
   </div>
-</section>
-
-<!-- ══ INFO ══ -->
-<section class="info-section">
-
-  <div class="info-card fade-up">
-    <div class="info-card-header">대표 강사 소개</div>
-    <div class="info-card-body">
-      <div class="teacher-bio">
-        <strong>10년 이상의 코딩 교육 전문가</strong>
-        코딩교육센터 운영 10년 이상<br>
-        초·중·고 SW·AI 교육 다수 진행<br>
-        대학 강의 및 특강 경험<br>
-        전국대회 프로젝트 지도 다수<br>
-        AI·웹·앱·로봇 프로젝트 개발<br>
-        입시 컨설팅 및 진로·포트폴리오 지도
-      </div>
-      <div class="teacher-quote">
-        "학생의 잠재력을 발견하고,<br>최고의 결과로 이끌어 드립니다!"
-      </div>
-    </div>
-  </div>
-
-  <div class="info-card fade-up">
-    <div class="info-card-header gold-hd">학생 맞춤 성장 보고서 제공</div>
-    <div class="info-card-body">
-      <div class="checklist">
-        <div class="check-item"><div class="check-dot"></div>코딩 실력 분석</div>
-        <div class="check-item"><div class="check-dot"></div>문제해결력 분석</div>
-        <div class="check-item"><div class="check-dot"></div>발표 역량 분석</div>
-        <div class="check-item"><div class="check-dot"></div>프로젝트 진행도</div>
-        <div class="check-item"><div class="check-dot"></div>향후 학습 방향 제시</div>
-      </div>
-      <div class="check-note">매월 학생별 맞춤 성장 리포트 제공</div>
-    </div>
-  </div>
-
-  <div class="info-card fade-up">
-    <div class="info-card-header">모집 안내</div>
-    <div class="info-card-body">
-      <div class="info-row"><span class="lbl gold">대상</span><span>Python / C++ 기초 이상 초등~중등</span></div>
-      <div class="info-row"><span class="lbl gold">모집</span><span>상시 모집 (선발 테스트 진행)</span></div>
-      <div class="info-row"><span class="lbl gold">수업</span><span>소수정예 팀 / 개인 맞춤 지도</span></div>
-      <div class="info-row"><span class="lbl">전화</span><span style="font-weight:700;">010-1234-5678</span></div>
-      <div class="info-row"><span class="lbl">카톡</span><span>creativecoding</span></div>
-      <div class="info-row"><span class="lbl">위치</span><span>제주특별자치도</span></div>
-    </div>
-  </div>
-
 </section>
 
 <!-- ══ FOOTER ══ -->
