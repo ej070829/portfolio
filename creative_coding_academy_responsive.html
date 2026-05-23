@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Creative Coding Academy</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* ─────────────────────────────────────────
+   RESET & VARIABLES
+───────────────────────────────────────── */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --navy:       #0D1B3E;
+  --navy-light: #1E3370;
+  --gold:       #C9A84C;
+  --gold-light: #E5C97E;
+  --gold-pale:  #F5E9C8;
+  --white:      #FFFFFF;
+  --bg:         #F7F8FC;
+  --gray:       #8A93A8;
+  --text:       #1A2340;
+  --green:      #1A6B3C;
+  --border:     #E0E5F0;
+
+  --px: clamp(18px, 5vw, 50px);   /* horizontal padding */
+  --r:  12px;                      /* border-radius */
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  color: var(--text);
+  background: var(--white);
+  -webkit-font-smoothing: antialiased;
+}
+
+img { display:block; max-width:100%; }
+a   { color: inherit; text-decoration: none; }
+
+/* ─────────────────────────────────────────
+   UTILITY
+───────────────────────────────────────── */
+.section-label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px; font-weight:700;
+  letter-spacing: 3px; text-transform:uppercase;
+  color: var(--gold); margin-bottom:6px;
+}
+.section-title {
+  font-size: clamp(20px,3vw,24px);
+  font-weight:800; color:var(--navy);
+  letter-spacing:-0.5px; line-height:1.2;
+}
+.section-desc {
+  font-size: 15px; color:var(--gray);
+  margin-top:5px; line-height:1.65;
+}
+
+/* ─────────────────────────────────────────
+   HERO
+───────────────────────────────────────── */
+.hero {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 60%, #1a3a7a 100%);
+  padding: clamp(36px,6vw,56px) var(--px) clamp(32px,5vw,48px);
+  position:relative; overflow:hidden;
+}
+.hero::after {
+  content:''; position:absolute;
+  top:-100px; right:-100px;
+  width: min(420px,80vw); height: min(420px,80vw);
+  border-radius:50%;
+  background: radial-gradient(circle, rgba(201,168,76,.13) 0%, transparent 70%);
+  pointer-events:none;
+}
+.hero-eyebrow {
+  font-family:'Montserrat',sans-serif;
+  font-size: clamp(10px,1.8vw,12px);
+  font-weight:700; letter-spacing:3px;
+  color:var(--gold); text-transform:uppercase;
+  margin-bottom:14px;
+}
+.hero-title {
+  font-size: clamp(34px,6.5vw,52px);
+  font-weight:900; color:#fff;
+  line-height:1.08; letter-spacing:-1.5px;
+  margin-bottom:14px;
+}
+.hero-title em { font-style:normal; color:var(--gold); }
+.hero-sub {
+  font-size: clamp(14px,2vw,16px);
+  color:rgba(255,255,255,.7);
+  line-height:1.7; margin-bottom:24px;
+  max-width:520px;
+}
+.hero-tags { display:flex; gap:8px; flex-wrap:wrap; }
+.hero-tag {
+  border:1px solid rgba(201,168,76,.5);
+  color:var(--gold-light);
+  font-size: clamp(12px,1.8vw,13px);
+  font-weight:600; padding:5px 14px;
+  border-radius:20px; letter-spacing:.3px;
+  white-space:nowrap;
+}
+
+/* ─────────────────────────────────────────
+   FEATURES BAR
+───────────────────────────────────────── */
+.features-bar {
+  background:var(--gold);
+  padding:0 var(--px);
+  display:flex; justify-content:space-between;
+  align-items:stretch; overflow-x:auto;
+  scrollbar-width:none;
+}
+.features-bar::-webkit-scrollbar { display:none; }
+.feat-item {
+  color:var(--navy);
+  font-size: clamp(12px,2vw,14px);
+  font-weight:700; padding:14px 8px;
+  letter-spacing:.3px; white-space:nowrap;
+  position:relative; flex-shrink:0;
+}
+.feat-item:not(:last-child)::after {
+  content:''; position:absolute;
+  right:0; top:50%; transform:translateY(-50%);
+  width:1px; height:14px;
+  background:rgba(13,27,62,.25);
+}
+
+/* ─────────────────────────────────────────
+   SECTION WRAP
+───────────────────────────────────────── */
+.section-wrap {
+  padding: clamp(36px,5vw,52px) var(--px);
+}
+.section-wrap.alt { background:var(--bg); }
+.section-header { margin-bottom:28px; }
+
+/* ─────────────────────────────────────────
+   COURSES GRID
+───────────────────────────────────────── */
+.courses-grid {
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%,340px),1fr));
+  gap:20px;
+}
+.course-card {
+  border-radius:var(--r); overflow:hidden;
+  border:1px solid var(--border); background:#fff;
+}
+.course-card-header {
+  background:var(--navy); padding:18px 22px;
+}
+.course-card-header.green-hd { background:var(--green); }
+.course-track {
+  font-family:'Montserrat',sans-serif;
+  font-size: 11px; font-weight:700;
+  letter-spacing:2px; color:rgba(255,255,255,.5);
+  text-transform:uppercase; margin-bottom:5px;
+}
+.course-card-title {
+  color:#fff; font-size: clamp(16px,2.5vw,18px);
+  font-weight:800; letter-spacing:-.3px;
+}
+.course-card-title span {
+  display:block; font-size: 13px; font-weight:500;
+  color:rgba(255,255,255,.6); margin-top:3px;
+}
+.course-card-body { padding:20px 22px; }
+.course-goal {
+  font-size: 14px; color:#5A6478; line-height:1.7;
+  margin-bottom:18px; padding-bottom:16px;
+  border-bottom:1px solid #EEF0F6;
+}
+
+/* flow steps */
+.flow-steps {
+  display:flex; align-items:center;
+  background:var(--bg); border-radius:8px;
+  overflow:hidden; margin-bottom:18px;
+}
+.flow-step {
+  flex:1; background:transparent;
+  color:var(--navy); font-size: clamp(11px,1.6vw,12px);
+  font-weight:700; padding:9px 4px;
+  text-align:center; line-height:1.3;
+  position:relative;
+}
+.flow-step:not(:last-child)::after {
+  content:'›'; position:absolute;
+  right:-5px; top:50%; transform:translateY(-50%);
+  color:var(--gold); font-size: 16px; font-weight:900; z-index:1;
+}
+.flow-step.active-step { background:var(--navy); color:#fff; }
+.flow-step.active-step.green { background:var(--green); }
+
+/* levels */
+.levels-grid {
+  display:grid;
+  grid-template-columns: repeat(3,1fr);
+  gap:8px; margin-bottom:18px;
+}
+.level-box { border-radius:8px; overflow:hidden; border:1px solid var(--border); }
+.level-header { background:var(--navy); padding:8px 10px; text-align:center; }
+.level-header.lv2 { background:#1A5C8C; }
+.level-header.lv3 { background:var(--green); }
+.level-num {
+  font-family:'Montserrat',sans-serif;
+  font-size: 10px; font-weight:700;
+  color:var(--gold-light); letter-spacing:1px;
+}
+.level-name { font-size: 13px; font-weight:800; color:#fff; margin-top:2px; }
+.level-body { padding:10px; background:#fff; }
+.level-item {
+  font-size: 12.5px; color:#4A5568;
+  padding:2.5px 0 2.5px 12px;
+  position:relative; line-height:1.4;
+}
+.level-item::before {
+  content:''; position:absolute;
+  left:2px; top:8px;
+  width:4px; height:4px;
+  border-radius:50%; background:var(--gold);
+}
+
+/* project grid */
+.project-grid {
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:8px; margin-bottom:18px;
+}
+.project-item {
+  background:var(--bg); border-radius:8px;
+  padding:10px 12px;
+  border-left:3px solid var(--navy);
+}
+.project-item.green-border { border-left-color:var(--green); }
+.project-item-title { font-size: 13.5px; font-weight:700; color:var(--navy); margin-bottom:2px; }
+.project-item-desc  { font-size: 12px; color:var(--gray); line-height:1.4; }
+
+/* bullet list */
+.bullet-list { list-style:none; display:flex; flex-direction:column; gap:6px; }
+.bullet-list li {
+  display:flex; align-items:flex-start; gap:8px;
+  font-size: 13.5px; color:#3A4560; line-height:1.5;
+}
+.bullet-list li::before {
+  content:''; width:5px; height:5px;
+  border-radius:50%; background:var(--gold);
+  flex-shrink:0; margin-top:6px;
+}
+
+/* ─────────────────────────────────────────
+   ACHIEVEMENTS
+───────────────────────────────────────── */
+.achieve-section {
+  background:var(--navy);
+  padding: clamp(36px,5vw,52px) var(--px);
+}
+.achieve-header { margin-bottom:26px; }
+.achieve-label {
+  font-family:'Montserrat',sans-serif;
+  font-size: 11px; font-weight:700;
+  letter-spacing:3px; text-transform:uppercase;
+  color:var(--gold); margin-bottom:6px;
+}
+.achieve-title {
+  font-size: clamp(20px,3vw,24px);
+  font-weight:800; color:#fff;
+  letter-spacing:-.5px;
+}
+.achieve-grid {
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px,1fr));
+  gap:12px;
+}
+.achieve-card {
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(201,168,76,.2);
+  border-radius:12px;
+  padding:18px 14px; text-align:center;
+}
+.achieve-year {
+  font-family:'Montserrat',sans-serif;
+  font-size: 12px; font-weight:700;
+  color:var(--gold); letter-spacing:1px;
+  margin-bottom:10px;
+}
+.achieve-divider {
+  width:24px; height:2px;
+  background:var(--gold); border-radius:2px;
+  margin:0 auto 10px;
+}
+.achieve-name {
+  font-size: clamp(12.5px,1.8vw,14px);
+  font-weight:700; color:#fff; line-height:1.45;
+  margin-bottom:6px;
+}
+.achieve-detail { font-size: 11.5px; color:rgba(255,255,255,.5); line-height:1.5; }
+
+/* ─────────────────────────────────────────
+   RESULTS + REPORT
+───────────────────────────────────────── */
+.results-section {
+  padding: clamp(36px,5vw,52px) var(--px);
+  background:var(--bg);
+}
+.two-col-bottom {
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%,360px),1fr));
+  gap:24px;
+}
+.block-card {
+  border-radius:var(--r); overflow:hidden;
+  border:1px solid var(--border); background:#fff;
+}
+.block-card-header {
+  background:var(--navy); padding:14px 20px;
+  color:#fff; font-size: clamp(13px,2vw,15px);
+  font-weight:800; letter-spacing:-.3px;
+}
+.block-card-header.green-hd { background:var(--green); }
+.block-card-body { padding:20px; }
+
+table { width:100%; border-collapse:collapse; font-size: 12.5px; }
+thead th {
+  background:#EEF2FA; color:var(--navy);
+  font-weight:700; padding:8px 10px;
+  text-align:center; border-bottom:1px solid #D8DFF0;
+  font-size: 12px; letter-spacing:.3px;
+}
+thead th:first-child { text-align:left; padding-left:16px; }
+tbody td {
+  padding:7px 10px; border-bottom:1px solid #F0F3F9;
+  color:#3A4560; text-align:center; vertical-align:middle;
+}
+tbody td:first-child { text-align:left; font-size: 12px; padding-left:16px; }
+tbody tr:last-child td  { border-bottom:none; }
+tbody tr:nth-child(even) td { background:#FAFBFF; }
+
+.award-badge {
+  display:inline-block; padding:2px 8px;
+  border-radius:4px; font-size: 11.5px; font-weight:700;
+}
+.award-silver { background:#EFF3FF; color:#3D5A99; }
+.award-prize  { background:#F0FFF4; color:var(--green); }
+
+/* report */
+.report-flow {
+  display:flex; align-items:center; gap:4px;
+  margin-bottom:20px; flex-wrap:nowrap;
+}
+.report-step {
+  flex:1; background:var(--bg);
+  border-radius:8px; padding:10px 4px;
+  text-align:center; border:1px solid #E8ECF5;
+  min-width:0;
+}
+.report-step-label {
+  font-size: clamp(11px,1.6vw,12px);
+  font-weight:700; color:var(--navy); line-height:1.3;
+}
+.report-arrow { color:var(--gold); font-size: 16px; font-weight:900; flex-shrink:0; }
+.report-items { display:flex; flex-direction:column; gap:6px; }
+.report-item {
+  font-size: 13px; color:#3A4560;
+  padding:7px 12px; background:var(--bg);
+  border-radius:6px; border-left:3px solid var(--green);
+}
+
+/* ─────────────────────────────────────────
+   INFO CARDS
+───────────────────────────────────────── */
+.info-section {
+  padding: clamp(36px,5vw,52px) var(--px);
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%,240px),1fr));
+  gap:20px;
+}
+.info-card {
+  border-radius:var(--r); overflow:hidden;
+  border:1px solid var(--border);
+}
+.info-card-header {
+  background:var(--navy); padding:13px 18px;
+  color:#fff; font-size: clamp(13px,2vw,15px); font-weight:800;
+}
+.info-card-header.gold-hd { background:var(--gold); color:var(--navy); }
+.info-card-body { padding:18px; background:#fff; }
+
+.teacher-bio { font-size: 13px; color:#4A5568; line-height:1.8; }
+.teacher-bio strong {
+  display:block; font-size: 14px; color:var(--navy);
+  font-weight:800; margin-bottom:8px; padding-bottom:8px;
+  border-bottom:1px solid #EEF0F6;
+}
+.teacher-quote {
+  margin-top:14px; padding:10px 14px;
+  background:var(--bg); border-radius:8px;
+  font-size: 13px; color:var(--navy);
+  font-weight:600; line-height:1.6;
+  border-left:3px solid var(--gold);
+}
+
+.checklist { display:flex; flex-direction:column; gap:6px; }
+.check-item {
+  display:flex; align-items:center; gap:9px;
+  font-size: 13.5px; color:#3A4560;
+  padding:5px 0; border-bottom:1px solid #F0F3F9;
+}
+.check-item:last-child { border-bottom:none; }
+.check-dot { width:6px; height:6px; border-radius:50%; background:var(--green); flex-shrink:0; }
+.check-note {
+  margin-top:14px; padding:9px 12px;
+  background:#FFFBF0; border-radius:8px;
+  font-size: 12.5px; color:#7A5500;
+  font-weight:600; text-align:center;
+  border:1px solid var(--gold-pale);
+}
+
+.info-row {
+  display:flex; gap:8px;
+  font-size: 13.5px; color:#3A4560;
+  padding:7px 0; border-bottom:1px solid #F0F3F9;
+  align-items:flex-start; line-height:1.5;
+}
+.info-row:last-child { border-bottom:none; }
+.info-row .lbl { font-weight:700; color:var(--navy); min-width:34px; flex-shrink:0; font-size: 13px; }
+.info-row .lbl.gold { color:var(--gold); }
+
+/* ─────────────────────────────────────────
+   FOOTER
+───────────────────────────────────────── */
+.footer {
+  background:var(--navy);
+  padding: clamp(20px,3vw,26px) var(--px);
+  display:flex; align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap; gap:16px;
+}
+.footer-logo { display:flex; align-items:center; gap:14px; }
+.logo-mark {
+  width:40px; height:40px;
+  border:2px solid var(--gold); border-radius:8px;
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Montserrat',sans-serif;
+  font-size: 13px; font-weight:900; color:var(--gold);
+  flex-shrink:0;
+}
+.logo-name {
+  font-family:'Montserrat',sans-serif;
+  font-size: clamp(12px,2vw,15px); font-weight:800;
+  color:#fff; letter-spacing:.5px;
+}
+.logo-tagline {
+  font-family:'Montserrat',sans-serif;
+  font-size: 10.5px; color:var(--gold-light);
+  letter-spacing:2px; margin-top:2px;
+}
+.footer-cta { text-align:center; }
+.cta-main {
+  font-size: clamp(14px,2.5vw,17px);
+  font-weight:800; color:var(--gold); letter-spacing:-.3px;
+}
+.cta-sub { font-size: 13px; color:rgba(255,255,255,.55); margin-top:3px; }
+.footer-contact { text-align:right; }
+.contact-line { font-size: 14px; color:rgba(255,255,255,.85); font-weight:500; padding:3px 0; }
+.contact-line strong { color:#fff; font-weight:700; }
+
+/* ─────────────────────────────────────────
+   SCROLL ANIMATIONS
+───────────────────────────────────────── */
+.fade-up {
+  opacity:0; transform:translateY(24px);
+  transition: opacity .55s ease, transform .55s ease;
+}
+.fade-up.visible { opacity:1; transform:translateY(0); }
+
+/* ─────────────────────────────────────────
+   RESPONSIVE: TABLET  ≤ 768px
+───────────────────────────────────────── */
+@media (max-width: 768px) {
+  .levels-grid { grid-template-columns:1fr 1fr; }
+  .achieve-grid { grid-template-columns: repeat(3,1fr); }
+  .two-col-bottom { grid-template-columns:1fr; }
+  .footer { flex-direction:column; text-align:center; }
+  .footer-contact { text-align:center; }
+  .footer-cta { order:-1; }
+}
+
+/* ─────────────────────────────────────────
+   RESPONSIVE: MOBILE  ≤ 480px
+───────────────────────────────────────── */
+@media (max-width: 480px) {
+  .hero-title { font-size: clamp(30px,9vw,40px); }
+
+  .feat-item { font-size: 12px; padding:12px 6px; }
+
+  .courses-grid  { grid-template-columns:1fr; }
+  .project-grid  { grid-template-columns:1fr; }
+  .levels-grid   { grid-template-columns:1fr; }
+
+  .flow-steps { flex-wrap:wrap; gap:4px; background:transparent; }
+  .flow-step  { background:var(--bg); border-radius:6px; flex:none; width:calc(50% - 4px); }
+  .flow-step:not(:last-child)::after { display:none; }
+  .flow-step.active-step { background:var(--navy); }
+  .flow-step.active-step.green { background:var(--green); }
+
+  .achieve-grid { grid-template-columns: repeat(2,1fr); }
+
+  .report-flow { flex-wrap:wrap; }
+  .report-step { flex: none; width:calc(33% - 4px); }
+  .report-arrow { display:none; }
+
+  .info-section { grid-template-columns:1fr; }
+
+  .footer { gap:20px; }
+  .logo-name { font-size: 13px; }
+}
+
+/* ─────────────────────────────────────────
+   RESPONSIVE: WIDE  ≥ 1200px
+───────────────────────────────────────── */
+@media (min-width: 1200px) {
+  body { max-width:1200px; margin:0 auto; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="hero-eyebrow">Creative Coding Academy · Elementary Program</div>
+  <h1 class="hero-title">전국대회·경시<br><em>전문 컨설팅</em></h1>
+  <p class="hero-sub">코드를 작성하고, 보고서를 만들고, 발표까지 완성합니다<br>코딩 · 알고리즘 · 발표 · 보고서까지 완성하는 통합 교육</p>
+  <div class="hero-tags">
+    <span class="hero-tag">코딩 실력</span>
+    <span class="hero-tag">알고리즘 사고력</span>
+    <span class="hero-tag">발표력 강화</span>
+    <span class="hero-tag">보고서 작성</span>
+    <span class="hero-tag">포트폴리오 완성</span>
+  </div>
+</section>
+
+<!-- ══ FEATURES BAR ══ -->
+<div class="features-bar">
+  <div class="feat-item">코딩 실력</div>
+  <div class="feat-item">알고리즘 사고력</div>
+  <div class="feat-item">발표력 강화</div>
+  <div class="feat-item">보고서 작성</div>
+  <div class="feat-item">포트폴리오 완성</div>
+</div>
+
+<!-- ══ COURSES ══ -->
+<section class="section-wrap">
+  <div class="section-header fade-up">
+    <div class="section-label">Education Program</div>
+    <div class="section-title">주요 교육 과정</div>
+    <div class="section-desc">초등부를 위한 맞춤형 두 가지 트랙으로 전국대회 진출을 목표로 합니다</div>
+  </div>
+
+  <div class="courses-grid">
+
+    <!-- 한국코드페어 -->
+    <div class="course-card fade-up">
+      <div class="course-card-header">
+        <div class="course-track">Project Track</div>
+        <div class="course-card-title">한국코드페어 프로젝트반
+          <span>초등부 대상</span>
+        </div>
+      </div>
+      <div class="course-card-body">
+        <p class="course-goal">기획·개발·발표·보고서까지 팀 프로젝트로<br>전국대회 진출을 목표로 합니다.</p>
+
+        <div class="flow-steps">
+          <div class="flow-step active-step">아이디어<br>발굴</div>
+          <div class="flow-step">기획 및<br>설계</div>
+          <div class="flow-step">개발<br>(Python/C++)</div>
+          <div class="flow-step">발표 및<br>시연</div>
+          <div class="flow-step">보고서<br>포트폴리오</div>
+        </div>
+
+        <div class="project-grid">
+          <div class="project-item">
+            <div class="project-item-title">AI 서비스 개발</div>
+            <div class="project-item-desc">머신러닝 기반 실생활 문제 해결</div>
+          </div>
+          <div class="project-item">
+            <div class="project-item-title">웹 / 앱 개발</div>
+            <div class="project-item-desc">아이디어를 서비스로 구현</div>
+          </div>
+          <div class="project-item">
+            <div class="project-item-title">아두이노 로봇 제작</div>
+            <div class="project-item-desc">하드웨어와 소프트웨어의 융합</div>
+          </div>
+          <div class="project-item">
+            <div class="project-item-title">데이터 분석 시각화</div>
+            <div class="project-item-desc">데이터로 인사이트 도출</div>
+          </div>
+        </div>
+
+        <ul class="bullet-list">
+          <li>Python, C++ 기반 프로젝트 수업</li>
+          <li>팀 협업을 통한 문제 해결력 향상</li>
+          <li>발표 및 보고서 작성 집중 훈련</li>
+          <li>한국코드페어 본선 진출 지원</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 수학·알고리즘 -->
+    <div class="course-card fade-up">
+      <div class="course-card-header green-hd">
+        <div class="course-track">Competition Track</div>
+        <div class="course-card-title">수학·알고리즘 경시반
+          <span>경시대회 · 정보올림피아드 대비</span>
+        </div>
+      </div>
+      <div class="course-card-body">
+        <p class="course-goal">수학적 사고력과 알고리즘 문제해결 능력 강화!<br>경시대회 및 정보올림피아드 대비.</p>
+
+        <div class="levels-grid">
+          <div class="level-box">
+            <div class="level-header">
+              <div class="level-num">LEVEL 1</div>
+              <div class="level-name">사고력 수학</div>
+            </div>
+            <div class="level-body">
+              <div class="level-item">규칙 찾기</div>
+              <div class="level-item">경우의 수</div>
+              <div class="level-item">논리 퍼즐</div>
+              <div class="level-item">수학적 사고력 기초</div>
+            </div>
+          </div>
+          <div class="level-box">
+            <div class="level-header lv2">
+              <div class="level-num">LEVEL 2</div>
+              <div class="level-name">알고리즘 기초</div>
+            </div>
+            <div class="level-body">
+              <div class="level-item">자료구조 기초</div>
+              <div class="level-item">탐색(DFS, BFS)</div>
+              <div class="level-item">벡터·트리</div>
+              <div class="level-item">그리디, DP 기초</div>
+            </div>
+          </div>
+          <div class="level-box">
+            <div class="level-header lv3">
+              <div class="level-num">LEVEL 3</div>
+              <div class="level-name">경시·올림피아드</div>
+            </div>
+            <div class="level-body">
+              <div class="level-item">정수론, 조합론</div>
+              <div class="level-item">기하, 수열</div>
+              <div class="level-item">KMO·KOI 대비</div>
+              <div class="level-item">실전 문제 풀이</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flow-steps" style="margin-bottom:18px;">
+          <div class="flow-step active-step green">문제 분석</div>
+          <div class="flow-step">알고리즘<br>설계</div>
+          <div class="flow-step">코드 구현</div>
+          <div class="flow-step">테스트<br>디버깅</div>
+          <div class="flow-step">최적화</div>
+        </div>
+
+        <ul class="bullet-list">
+          <li>정보올림피아드 대비 (Python / C++)</li>
+          <li>전국 경시대회 대비</li>
+          <li>수학 + 알고리즘 통합 교육</li>
+          <li>개인별 오답 분석 및 맞춤 피드백</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ ACHIEVEMENTS ══ -->
+<section class="achieve-section">
+  <div class="achieve-header fade-up">
+    <div class="achieve-label">Student Results</div>
+    <div class="achieve-title">우리 학생들의 실제 성과</div>
+  </div>
+  <div class="achieve-grid">
+    <div class="achieve-card fade-up">
+      <div class="achieve-year">2019</div>
+      <div class="achieve-divider"></div>
+      <div class="achieve-name">ISEF 한국대표<br>국제대회 참가</div>
+      <div class="achieve-detail">고등부<br>국제과학기술경진대회</div>
+    </div>
+    <div class="achieve-card fade-up">
+      <div class="achieve-year">2022</div>
+      <div class="achieve-divider"></div>
+      <div class="achieve-name">한국코드페어<br>초등부 은상</div>
+      <div class="achieve-detail">&nbsp;</div>
+    </div>
+    <div class="achieve-card fade-up">
+      <div class="achieve-year">2023</div>
+      <div class="achieve-divider"></div>
+      <div class="achieve-name">한국코드페어<br>중등부 대상</div>
+      <div class="achieve-detail">&nbsp;</div>
+    </div>
+    <div class="achieve-card fade-up">
+      <div class="achieve-year">2025</div>
+      <div class="achieve-divider"></div>
+      <div class="achieve-name">경시대회<br>전국대회 장려상</div>
+      <div class="achieve-detail">1차대회 지역 금상<br>전국 은상</div>
+    </div>
+    <div class="achieve-card fade-up">
+      <div class="achieve-year">2025</div>
+      <div class="achieve-divider"></div>
+      <div class="achieve-name">한국정보올림피아드<br>다수 실적 보유</div>
+      <div class="achieve-detail">지역·동상·전체 장려상<br>지역·동상·전체 은상<br>장려상 2건</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ RESULTS + REPORT ══ -->
+<section class="results-section">
+  <div class="section-header fade-up">
+    <div class="section-label">Competition Record</div>
+    <div class="section-title">주요 실적 및 보고서 시스템</div>
+  </div>
+  <div class="two-col-bottom">
+
+    <div class="block-card fade-up">
+      <div class="block-card-header">정보올림피아드 & 경시대회 주요 실적 (2025)</div>
+      <div class="block-card-body" style="padding:0;">
+        <table>
+          <thead>
+            <tr><th>대회명</th><th>부문</th><th>수상</th><th>주관</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>제11회 SW사고력올림피아드</td><td>초등부</td><td><span class="award-badge award-silver">은상</span></td><td style="color:var(--gray); font-size: 11.5px;">전자신문사</td></tr>
+            <tr><td>제11회 SW사고력올림피아드</td><td>초등부</td><td><span class="award-badge award-prize">장려상</span></td><td style="color:var(--gray); font-size: 11.5px;">전자신문사</td></tr>
+            <tr><td>한국정보올림피아드 제주지역</td><td>초등부</td><td><span class="award-badge award-prize">지역동상</span></td><td style="color:var(--gray); font-size: 11.5px;">한국정보올림피아드</td></tr>
+            <tr><td>한국정보올림피아드 제주지역</td><td>초등부</td><td><span class="award-badge award-prize">지역동상</span></td><td style="color:var(--gray); font-size: 11.5px;">한국정보올림피아드</td></tr>
+            <tr><td>한국정보올림피아드 제주지역</td><td>초등부</td><td><span class="award-badge award-silver">지역은상</span></td><td style="color:var(--gray); font-size: 11.5px;">한국정보올림피아드</td></tr>
+            <tr><td>한국정보올림피아드 제주지역</td><td>중등부</td><td><span class="award-badge award-silver">1차예선 전체 은상</span></td><td style="color:var(--gray); font-size: 11.5px;">한국정보올림피아드</td></tr>
+            <tr><td>한국정보올림피아드 본선</td><td>초등부</td><td><span class="award-badge award-prize">장려상</span></td><td style="color:var(--gray); font-size: 11.5px;">한국정보올림피아드</td></tr>
+            <tr><td>한국정보올림피아드 본선</td><td>중등부</td><td><span class="award-badge award-prize">장려상</span></td><td style="color:var(--gray); font-size: 11.5px;">한국정보올림피아드</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="block-card fade-up">
+      <div class="block-card-header green-hd">체계적인 보고서 작성 시스템</div>
+      <div class="block-card-body">
+        <div class="report-flow">
+          <div class="report-step"><div class="report-step-label">주제<br>선정</div></div>
+          <div class="report-arrow">›</div>
+          <div class="report-step"><div class="report-step-label">자료<br>조사</div></div>
+          <div class="report-arrow">›</div>
+          <div class="report-step"><div class="report-step-label">데이터<br>분석·구현</div></div>
+          <div class="report-arrow">›</div>
+          <div class="report-step"><div class="report-step-label">보고서<br>작성</div></div>
+          <div class="report-arrow">›</div>
+          <div class="report-step"><div class="report-step-label">발표 및<br>피드백</div></div>
+        </div>
+        <div style="font-size: 13.5px; font-weight:800; color:var(--navy); margin-bottom:10px;">보고서 구성</div>
+        <div class="report-items">
+          <div class="report-item">문제 정의 및 배경</div>
+          <div class="report-item">관련 이론 및 분석</div>
+          <div class="report-item">설계 및 구현 과정</div>
+          <div class="report-item">실험 및 결과 분석</div>
+          <div class="report-item">결론 및 향후 개선점</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ INFO ══ -->
+<section class="info-section">
+
+  <div class="info-card fade-up">
+    <div class="info-card-header">대표 강사 소개</div>
+    <div class="info-card-body">
+      <div class="teacher-bio">
+        <strong>10년 이상의 코딩 교육 전문가</strong>
+        코딩교육센터 운영 10년 이상<br>
+        초·중·고 SW·AI 교육 다수 진행<br>
+        대학 강의 및 특강 경험<br>
+        전국대회 프로젝트 지도 다수<br>
+        AI·웹·앱·로봇 프로젝트 개발<br>
+        입시 컨설팅 및 진로·포트폴리오 지도
+      </div>
+      <div class="teacher-quote">
+        "학생의 잠재력을 발견하고,<br>최고의 결과로 이끌어 드립니다!"
+      </div>
+    </div>
+  </div>
+
+  <div class="info-card fade-up">
+    <div class="info-card-header gold-hd">학생 맞춤 성장 보고서 제공</div>
+    <div class="info-card-body">
+      <div class="checklist">
+        <div class="check-item"><div class="check-dot"></div>코딩 실력 분석</div>
+        <div class="check-item"><div class="check-dot"></div>문제해결력 분석</div>
+        <div class="check-item"><div class="check-dot"></div>발표 역량 분석</div>
+        <div class="check-item"><div class="check-dot"></div>프로젝트 진행도</div>
+        <div class="check-item"><div class="check-dot"></div>향후 학습 방향 제시</div>
+      </div>
+      <div class="check-note">매월 학생별 맞춤 성장 리포트 제공</div>
+    </div>
+  </div>
+
+  <div class="info-card fade-up">
+    <div class="info-card-header">모집 안내</div>
+    <div class="info-card-body">
+      <div class="info-row"><span class="lbl gold">대상</span><span>Python / C++ 기초 이상 초등~중등</span></div>
+      <div class="info-row"><span class="lbl gold">모집</span><span>상시 모집 (선발 테스트 진행)</span></div>
+      <div class="info-row"><span class="lbl gold">수업</span><span>소수정예 팀 / 개인 맞춤 지도</span></div>
+      <div class="info-row"><span class="lbl">전화</span><span style="font-weight:700;">010-1234-5678</span></div>
+      <div class="info-row"><span class="lbl">카톡</span><span>creativecoding</span></div>
+      <div class="info-row"><span class="lbl">위치</span><span>제주특별자치도</span></div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer class="footer">
+  <div class="footer-logo">
+    <div class="logo-mark">&lt;/&gt;</div>
+    <div>
+      <div class="logo-name">CREATIVE CODING ACADEMY</div>
+      <div class="logo-tagline">CREATE · CODE · COMPETE</div>
+    </div>
+  </div>
+  <div class="footer-cta">
+    <div class="cta-main">코딩으로 꿈을 만들고, 전국 무대로 도전하세요!</div>
+    <div class="cta-sub">초등부 전문 컨설팅 · 전국대회 진출 목표</div>
+  </div>
+  <div class="footer-contact">
+    <div class="contact-line"><strong>010-1234-5678</strong></div>
+    <div class="contact-line">creativecoding</div>
+  </div>
+</footer>
+
+<script>
+  // Intersection Observer: fade-up on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.fade-up').forEach((el, i) => {
+    el.style.transitionDelay = (i % 4) * 80 + 'ms';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
