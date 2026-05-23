@@ -47,7 +47,6 @@ nav{position:sticky;top:0;z-index:200;background:rgba(13,17,23,0.97);backdrop-fi
 .hero-title{font-family:var(--ff);font-size:clamp(42px,6.5vw,78px);font-weight:900;letter-spacing:-2px;color:#fff;line-height:1.12;margin-bottom:28px;opacity:0;animation:fu .9s .25s ease forwards;}
 .hero-title em{font-style:normal;color:rgba(255,255,255,0.4)}
 
-/* DESC — 단어별 애니메이션 */
 .hero-desc{font-family:var(--ff);font-size:clamp(15px,1.9vw,19px);font-weight:400;color:rgba(255,255,255,0.65);line-height:1.85;max-width:680px;margin:0 auto;word-break:keep-all;}
 .hero-desc .word{display:inline-block;opacity:0;transform:translateY(12px);transition:opacity .4s ease, transform .4s ease;}
 .hero-desc .word.visible{opacity:1;transform:none;}
@@ -63,18 +62,16 @@ nav{position:sticky;top:0;z-index:200;background:rgba(13,17,23,0.97);backdrop-fi
   margin:0 auto;
   opacity:0;animation:fu .8s .65s ease forwards;
 }
-/* 태블릿: 2열 + 마지막 카드 가운데 정렬 */
 @media(max-width:860px){
   .hero-cards{grid-template-columns:repeat(2,1fr);max-width:600px;}
   .hero-card:last-child{grid-column:1 / -1;max-width:280px;margin:0 auto;width:100%;}
 }
-/* 모바일: 1열 */
 @media(max-width:520px){
   .hero-cards{grid-template-columns:1fr;max-width:400px;gap:12px;}
   .hero-card:last-child{grid-column:auto;max-width:none;margin:0;}
   .hero{padding:60px 24px 100px}
 }
-.hero-card{border-radius:22px;padding:30px 20px;cursor:pointer;transition:transform .35s cubic-bezier(.34,1.56,.64,1),box-shadow .3s ease,border-color .3s ease,background .3s ease;text-align:center;}
+.hero-card{border-radius:22px;padding:30px 20px;cursor:pointer;transition:transform .35s cubic-bezier(.34,1.56,.64,1),box-shadow .3s ease,border-color .3s ease,background .3s ease;text-align:center;color:inherit;text-decoration:none;display:block;}
 .hc-elem{border:1.5px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.05)}
 .hc-mid{border:1.5px solid rgba(150,120,255,0.3);background:rgba(100,80,200,0.1)}
 .hc-high{border:1.5px solid rgba(60,200,140,0.3);background:rgba(30,160,110,0.08)}
@@ -109,7 +106,6 @@ nav{position:sticky;top:0;z-index:200;background:rgba(13,17,23,0.97);backdrop-fi
 .sec-lead{font-family:var(--ff);font-size:16px;font-weight:300;color:var(--ink3);max-width:560px;line-height:1.85;margin-top:16px}
 .sec-dk .sec-lead{color:rgba(242,239,233,0.45)}
 
-/* scroll-reveal for sections */
 .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;}
 .reveal.visible{opacity:1;transform:none;}
 
@@ -177,25 +173,29 @@ footer{background:var(--ink);padding:28px 48px;border-top:0.5px solid var(--line
       AI·코딩 입시 전문<br/>
       <em>컨설팅</em>
     </div>
-    <!-- 단어별 애니메이션 — JS가 span으로 분리 -->
     <p class="hero-desc" id="heroDesc">초등 전국대회부터 중등 특목·국제학교 준비, 고등 생기부 컨설팅까지 학생의 아이디어를 프로젝트와 입시 포트폴리오로 연결합니다.</p>
     <div class="hero-divider"></div>
     <div class="hero-cards">
-      <div class="hero-card hc-elem">
+
+      <!-- 초등부: creative_coding_academy_responsive.html 로 이동 -->
+      <a href="creative_coding_academy_responsive.html" class="hero-card hc-elem">
         <span class="hc-tag">Elementary</span>
         <h2>초등부</h2>
         <p>한국코드페어·전국대회 준비<br/>아이디어 발굴부터 작품 제작, 발표까지</p>
-      </div>
+      </a>
+
       <div class="hero-card hc-mid">
         <span class="hc-tag">Middle School</span>
         <h2>중등부</h2>
         <p>디미고·과학고·국제학교 준비<br/>AI 프로젝트와 자기소개서 방향 설계</p>
       </div>
+
       <div class="hero-card hc-high">
         <span class="hc-tag">High School</span>
         <h2>고등부</h2>
         <p>생기부·세특·대입 컨설팅<br/>전공 적합성과 탐구 스토리 구성</p>
       </div>
+
     </div>
   </div>
   <div class="scroll-indicator">
@@ -325,11 +325,10 @@ secs.forEach(s=>navIO.observe(s));
       setTimeout(()=>s.classList.add('visible'), 600 + i*55);
     });
   }
-  // hero-title 애니메이션(0.45s delay)이 끝난 뒤 시작
   setTimeout(startWordAnim, 450);
 })();
 
-/* ── 스크롤 reveal (섹션 요소들) ── */
+/* ── 스크롤 reveal ── */
 const revealEls=document.querySelectorAll('.reveal');
 const revealIO=new IntersectionObserver(entries=>{
   entries.forEach(e=>{
