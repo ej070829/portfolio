@@ -86,7 +86,7 @@ body::before {
 
 .hero-title {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(56px,9vw,110px);
+  font-size: clamp(38px,8vw,110px);
   line-height: .95;
   letter-spacing: 1px;
   color: var(--white);
@@ -749,6 +749,73 @@ footer {
 .light .recruit-sub { color: #6A6560; }
 .light .recruit-title { color: #1A1A1A; }
 .light .lang-chip { background: #E8E5E0; border-color: rgba(232,98,26,0.25); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 480px) {
+  .hero { padding: 48px 20px 40px; min-height: auto; }
+  .hero-eyebrow { font-size: 9px; letter-spacing: 2.5px; margin-bottom: 12px; }
+  .hero-title { font-size: clamp(36px,11vw,52px); line-height:1.0; margin-bottom:6px; }
+  .hero-sub-row { gap:10px; margin: 16px 0 0; }
+  .hero-sub { font-size: 13px; }
+  .scroll-ind { display:none; }
+
+  .orange-bar { padding:0 16px; }
+  .bar-item { font-size:11px; padding:12px 6px; }
+
+  .recruit-banner { padding:24px 20px; }
+  .recruit-title { font-size:26px; }
+  .recruit-badge { font-size:10px; }
+  .lang-chip { font-size:12px; padding:4px 12px; }
+  .recruit-sub { font-size:13px; }
+  .recruit-contact { min-width:auto; }
+  .recruit-contact-label { font-size:11px; }
+  .recruit-contact-value { font-size:13px; }
+
+  .section-wrap { padding:36px 20px; }
+  .achieve-section,
+  .projects-section,
+  .results-section,
+  .target-section,
+  .roadmap-section { padding:36px 20px; }
+
+  .section-title { font-size:28px; }
+  .section-eyebrow { font-size:9px; }
+
+  .course-card-title { font-size:22px; }
+  .project-card-name { font-size:15px; }
+
+  .achieve-grid { grid-template-columns: repeat(2,1fr); gap:8px; }
+  .achieve-card { padding:14px 10px; }
+  .achieve-name { font-size:11px; }
+
+  .projects-grid { grid-template-columns:1fr; }
+  .target-grid   { grid-template-columns:1fr; }
+
+  .roadmap-steps { grid-template-columns: repeat(2,1fr); }
+  .roadmap-step  { border-right:1px solid var(--border2); border-bottom:1px solid var(--border2); }
+  .roadmap-step:nth-child(2n) { border-right:none; }
+
+  footer { flex-direction:column; text-align:center; padding:20px; gap:14px; }
+  .footer-contact { text-align:center; }
+  .footer-cta { order:-1; }
+}
+
+@media (min-width:481px) and (max-width:768px) {
+  .hero { padding:60px 28px 50px; min-height:auto; }
+  .hero-title { font-size:clamp(42px,9vw,68px); }
+  .section-wrap,
+  .achieve-section,
+  .projects-section,
+  .results-section,
+  .target-section,
+  .roadmap-section { padding:44px 28px; }
+  .achieve-grid { grid-template-columns: repeat(3,1fr); }
+  .roadmap-steps { grid-template-columns: repeat(4,1fr); }
+}
+
+@media (min-width:1200px) {
+  body { max-width:1200px; margin:0 auto; }
+}
 
 /* ── ANIMATIONS ── */
 .fade-up { opacity:0; transform:translateY(24px); transition:opacity .6s ease, transform .6s ease; }
