@@ -296,7 +296,7 @@ body::before {
 }
 
 .course-card-body {
-  padding:28px 30px;
+  padding:20px 20px;
   display:grid; grid-template-columns:1fr 1fr;
   gap:18px 28px; align-content:start;
 }
@@ -358,6 +358,7 @@ body::before {
 
 /* project grid */
 .project-grid {
+  grid-column: 1 / -1;
   display:grid; grid-template-columns:repeat(4,1fr);
   gap:8px;
 }
@@ -366,12 +367,13 @@ body::before {
 }
 .project-item {
   background:var(--charcoal3);
-  border-radius:6px; padding:10px 12px;
+  border-radius:6px; padding:12px 14px;
   border-left:3px solid var(--orange);
+  min-width:0;
 }
 .project-item.amber-border { border-left-color:var(--amber); }
-.project-item-title { font-size: 17px; font-weight:700; color:var(--white); margin-bottom:3px; }
-.project-item-desc  { font-size: 15px; color:var(--gray); line-height:1.4; }
+.project-item-title { font-size: 15px; font-weight:700; color:var(--white); margin-bottom:4px; line-height:1.35; word-break:keep-all; }
+.project-item-desc  { font-size: 13px; color:var(--gray); line-height:1.5; word-break:keep-all; }
 
 /* bullet list */
 .bullet-list { list-style:none; display:flex; flex-direction:column; gap:7px; }
@@ -810,7 +812,7 @@ footer {
 }
 
 @media (min-width:1200px) {
-  body { max-width:1200px; margin:0 auto; }
+  body { max-width:none; margin:0; }
 }
 
 /* ── ANIMATIONS ── */
