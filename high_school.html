@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Creative Coding Academy — 고등부</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;800;900&family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+
+:root {
+  --green-deep:  #0D2B1F;
+  --green-dark:  #163D2C;
+  --green-mid:   #1E5038;
+  --green-light: #276B4A;
+  --green-accent:#2E8B57;
+  --cream:       #F5F0E8;
+  --cream2:      #EDE8DE;
+  --cream3:      #E2DBD0;
+  --ivory:       #FAF7F2;
+  --gold:        #C8A96E;
+  --gold-light:  #DFC08A;
+  --white:       #FFFFFF;
+  --gray:        #8A9088;
+  --gray2:       #5A6058;
+  --border:      rgba(200,169,110,0.2);
+  --border2:     rgba(255,255,255,0.08);
+  --text:        #1A2B1F;
+
+  --px: clamp(20px,5vw,60px);
+  --r:  10px;
+}
+
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  background: var(--ivory);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── HERO ── */
+.hero {
+  min-height: 65vh;
+  background: linear-gradient(135deg, var(--green-deep) 0%, var(--green-dark) 50%, var(--green-mid) 100%);
+  position: relative; overflow: hidden;
+  display: flex; flex-direction: column;
+  justify-content: center;
+  padding: clamp(60px,8vw,100px) var(--px) clamp(50px,6vw,80px);
+}
+.hero::before {
+  content:'';
+  position:absolute; inset:0;
+  background-image:
+    linear-gradient(rgba(200,169,110,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(200,169,110,0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events:none;
+}
+.hero-glow {
+  position:absolute; width:500px; height:500px; border-radius:50%;
+  background: radial-gradient(circle, rgba(46,139,87,0.15) 0%, transparent 70%);
+  top:-80px; right:-80px; pointer-events:none;
+}
+.hero-eyebrow {
+  font-family:'Montserrat',sans-serif;
+  font-size:10px; font-weight:700;
+  letter-spacing:4px; text-transform:uppercase;
+  color:var(--gold); margin-bottom:18px;
+  opacity:0; animation:fu .6s .1s ease forwards;
+}
+.hero-title {
+  font-family:'Montserrat','Noto Sans KR',sans-serif;
+  font-size:clamp(28px,5.5vw,72px);
+  font-weight:900; line-height:1.15;
+  letter-spacing:-1px; color:var(--white);
+  margin-bottom:8px; max-width:12em;
+  opacity:0; animation:fu .8s .2s ease forwards;
+}
+.hero-title em { font-style:normal; color:var(--gold-light); }
+.hero-sub-row {
+  display:flex; align-items:center; gap:14px;
+  margin:20px 0 0;
+  opacity:0; animation:fu .7s .4s ease forwards;
+}
+.hero-line { width:36px; height:2px; background:var(--gold); flex-shrink:0; }
+.hero-sub {
+  font-size:clamp(13px,1.8vw,15px);
+  color:rgba(255,255,255,0.65); line-height:1.75; max-width:540px;
+}
+.scroll-ind {
+  position:absolute; bottom:24px; left:var(--px);
+  display:flex; align-items:center; gap:10px;
+  opacity:0; animation:fi 1s 1.2s ease forwards;
+}
+.scroll-bar { width:32px; height:1px; background:var(--gold); }
+.scroll-lbl {
+  font-family:'Montserrat',sans-serif;
+  font-size:9px; letter-spacing:3px; text-transform:uppercase;
+  color:rgba(255,255,255,0.3);
+}
+
+/* ── GREEN BAR ── */
+.green-bar {
+  background: var(--green-mid);
+  border-bottom:2px solid var(--gold);
+  padding:0 var(--px);
+  display:flex; justify-content:space-between;
+  align-items:stretch; overflow-x:auto; scrollbar-width:none;
+}
+.green-bar::-webkit-scrollbar { display:none; }
+.bar-item {
+  color:var(--gold-light);
+  font-size:clamp(11px,1.8vw,13px);
+  font-weight:700; padding:14px 8px;
+  letter-spacing:.5px; white-space:nowrap;
+  position:relative; flex-shrink:0;
+  font-family:'Montserrat',sans-serif;
+}
+.bar-item:not(:last-child)::after {
+  content:''; position:absolute;
+  right:0; top:50%; transform:translateY(-50%);
+  width:1px; height:14px; background:rgba(200,169,110,0.3);
+}
+
+/* ── RECRUIT BANNER ── */
+.recruit-banner {
+  background:var(--ivory);
+  border-bottom:1px solid var(--cream3);
+  padding:clamp(28px,4vw,44px) var(--px);
+}
+.recruit-inner {
+  display:grid; grid-template-columns:1fr auto;
+  gap:32px; align-items:center;
+}
+.recruit-badge {
+  display:inline-flex; align-items:center;
+  background:var(--green-dark);
+  color:var(--gold-light);
+  font-family:'Montserrat',sans-serif;
+  font-size:11px; font-weight:700;
+  letter-spacing:2px; text-transform:uppercase;
+  padding:5px 14px; border-radius:3px; margin-bottom:14px;
+}
+.recruit-title {
+  font-family:'Montserrat','Noto Sans KR',sans-serif;
+  font-size:clamp(24px,3.5vw,36px);
+  font-weight:900; color:var(--text);
+  margin-bottom:14px; line-height:1.2;
+}
+.recruit-title em { font-style:normal; color:var(--green-accent); }
+.recruit-sub { font-size:15px; color:var(--gray2); line-height:1.65; }
+.recruit-contact {
+  display:flex; flex-direction:column;
+  gap:0; align-items:stretch; flex-shrink:0; min-width:270px;
+  border:1px solid var(--cream3); border-radius:var(--r);
+  overflow:hidden; background:var(--white);
+  box-shadow:0 2px 12px rgba(13,43,31,0.06);
+}
+.recruit-contact-item {
+  display:flex; align-items:center; gap:14px;
+  padding:10px 18px; border-bottom:1px solid var(--cream2);
+}
+.recruit-contact-item:last-child { border-bottom:none; }
+.recruit-contact-label {
+  font-family:'Montserrat',sans-serif;
+  font-size:12px; font-weight:700;
+  letter-spacing:1px; text-transform:uppercase;
+  color:var(--gold); min-width:34px; flex-shrink:0;
+}
+.recruit-contact-value { font-size:14px; font-weight:600; color:var(--text); }
+@media(max-width:640px){
+  .recruit-inner { grid-template-columns:1fr; }
+  .recruit-contact { min-width:auto; }
+}
+
+/* ── SECTION ── */
+.section-wrap { padding:clamp(44px,6vw,68px) var(--px); background:var(--ivory); }
+.section-wrap.alt { background:var(--cream); }
+.section-header { margin-bottom:32px; }
+.section-eyebrow {
+  font-family:'Montserrat',sans-serif;
+  font-size:10px; font-weight:700;
+  letter-spacing:4px; text-transform:uppercase;
+  color:var(--green-accent); margin-bottom:8px;
+}
+.section-title {
+  font-family:'Montserrat','Noto Sans KR',sans-serif;
+  font-size:clamp(24px,4vw,40px);
+  font-weight:900; color:var(--text); line-height:1.15; letter-spacing:-0.5px;
+}
+.section-desc { font-size:14px; color:var(--gray2); margin-top:8px; line-height:1.7; }
+
+/* ── PAIN POINTS ── */
+.pain-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));
+  gap:12px; margin-top:4px;
+}
+.pain-item {
+  display:flex; align-items:flex-start; gap:12px;
+  background:var(--white); border-radius:var(--r);
+  padding:16px 18px;
+  border-left:3px solid var(--green-mid);
+  box-shadow:0 1px 6px rgba(13,43,31,0.05);
+}
+.pain-check {
+  width:22px; height:22px; border-radius:50%;
+  background:var(--green-mid);
+  display:flex; align-items:center; justify-content:center;
+  flex-shrink:0; margin-top:1px;
+  font-size:11px; color:white; font-weight:700;
+}
+.pain-text { font-size:14px; color:var(--text); line-height:1.6; font-weight:500; }
+
+/* ── CONSULTING PROCESS ── */
+.process-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+  gap:0; border:1px solid var(--cream3); border-radius:var(--r);
+  overflow:hidden; margin-top:4px;
+}
+.process-step {
+  padding:22px 14px; text-align:center;
+  border-right:1px solid var(--cream3);
+  background:var(--white); transition:.2s; position:relative;
+}
+.process-step:last-child { border-right:none; }
+.process-step:hover { background:var(--cream); }
+.process-step.highlight { background:var(--green-dark); }
+.process-step-num {
+  font-family:'Montserrat',sans-serif;
+  font-size:10px; font-weight:700;
+  letter-spacing:2px; color:var(--green-accent);
+  margin-bottom:8px; text-transform:uppercase;
+}
+.process-step.highlight .process-step-num { color:rgba(200,169,110,0.6); }
+.process-step-title {
+  font-size:14px; font-weight:800; color:var(--text); line-height:1.3; margin-bottom:5px;
+}
+.process-step.highlight .process-step-title { color:var(--white); }
+.process-step-desc { font-size:11px; color:var(--gray2); line-height:1.5; }
+.process-step.highlight .process-step-desc { color:rgba(255,255,255,0.6); }
+.process-arrow {
+  position:absolute; right:-10px; top:50%; transform:translateY(-50%);
+  color:var(--gold); font-size:16px; font-weight:900; z-index:2;
+}
+@media(max-width:700px){
+  .process-grid { grid-template-columns:repeat(2,1fr); }
+  .process-step { border-right:1px solid var(--cream3); border-bottom:1px solid var(--cream3); }
+  .process-step:nth-child(2n) { border-right:none; }
+  .process-arrow { display:none; }
+}
+
+/* ── WHAT WE DO ── */
+.what-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));
+  gap:16px; margin-top:4px;
+}
+.what-card {
+  background:var(--white); border-radius:var(--r);
+  padding:22px 20px;
+  border:1px solid var(--cream3);
+  box-shadow:0 2px 10px rgba(13,43,31,0.04);
+  transition:.25s;
+}
+.what-card:hover { border-color:rgba(46,139,87,0.35); transform:translateY(-3px); }
+.what-card-title {
+  font-size:15px; font-weight:800; color:var(--text);
+  margin-bottom:10px; padding-bottom:10px;
+  border-bottom:2px solid var(--green-mid);
+}
+.what-list { list-style:none; display:flex; flex-direction:column; gap:5px; }
+.what-list li {
+  font-size:13px; color:var(--gray2); line-height:1.5;
+  padding-left:12px; position:relative;
+}
+.what-list li::before {
+  content:''; position:absolute; left:2px; top:7px;
+  width:4px; height:4px; border-radius:50%;
+  background:var(--green-accent);
+}
+
+/* ── STORY ── */
+.story-section {
+  background:var(--green-deep);
+  padding:clamp(44px,6vw,68px) var(--px);
+}
+.story-inner {
+  display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:center;
+}
+.story-left {}
+.story-quote {
+  font-family:'Montserrat','Noto Sans KR',sans-serif;
+  font-size:clamp(22px,3vw,32px);
+  font-weight:900; color:var(--white);
+  line-height:1.35; margin-bottom:20px;
+  letter-spacing:-0.5px;
+}
+.story-quote em { font-style:normal; color:var(--gold-light); }
+.story-body {
+  font-size:14px; color:rgba(255,255,255,0.65);
+  line-height:1.85;
+}
+.story-highlight {
+  margin-top:20px; padding:16px 20px;
+  background:rgba(200,169,110,0.1);
+  border-left:3px solid var(--gold);
+  border-radius:0 6px 6px 0;
+  font-size:15px; font-weight:700;
+  color:var(--gold-light); line-height:1.6;
+  font-family:'Montserrat','Noto Sans KR',sans-serif;
+}
+.story-right {
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(200,169,110,0.2);
+  border-radius:var(--r); padding:28px 24px;
+}
+.story-result-title {
+  font-family:'Montserrat',sans-serif;
+  font-size:10px; font-weight:700;
+  letter-spacing:3px; text-transform:uppercase;
+  color:var(--gold); margin-bottom:20px;
+}
+.result-row {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:12px 0; border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.result-row:last-child { border-bottom:none; }
+.result-school { font-size:14px; color:rgba(255,255,255,0.85); font-weight:500; }
+.result-count {
+  font-family:'Montserrat',sans-serif;
+  font-size:13px; font-weight:700;
+  background:rgba(46,139,87,0.25);
+  border:1px solid rgba(46,139,87,0.4);
+  color:#7FD4A0; padding:3px 12px; border-radius:4px;
+}
+@media(max-width:700px){
+  .story-inner { grid-template-columns:1fr; gap:28px; }
+}
+
+/* ── ACHIEVEMENTS ── */
+.achieve-section {
+  background:var(--cream); padding:clamp(44px,6vw,68px) var(--px);
+  border-top:1px solid var(--cream3);
+}
+.achieve-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:12px; margin-top:32px;
+}
+.achieve-card {
+  background:var(--white); border:1px solid var(--cream3);
+  border-radius:var(--r); padding:20px 14px; text-align:center;
+  box-shadow:0 2px 8px rgba(13,43,31,0.04);
+  transition:.25s;
+}
+.achieve-card:hover { border-color:rgba(46,139,87,0.3); transform:translateY(-3px); }
+.achieve-year {
+  font-family:'Montserrat',sans-serif;
+  font-size:11px; font-weight:700;
+  color:var(--green-accent); letter-spacing:1.5px; margin-bottom:10px;
+}
+.achieve-divider {
+  width:20px; height:2px; background:var(--green-mid);
+  border-radius:2px; margin:0 auto 10px;
+}
+.achieve-name { font-size:14px; font-weight:700; color:var(--text); line-height:1.45; margin-bottom:6px; }
+.achieve-detail { font-size:12px; color:var(--gray2); line-height:1.5; }
+
+/* ── VS SECTION ── */
+.vs-section {
+  background:var(--ivory); padding:clamp(44px,6vw,68px) var(--px);
+}
+.vs-grid {
+  display:grid; grid-template-columns:1fr auto 1fr;
+  gap:20px; align-items:center; margin-top:32px;
+}
+.vs-card {
+  border-radius:var(--r); overflow:hidden;
+  border:1px solid var(--cream3);
+}
+.vs-card-header {
+  padding:14px 18px;
+  font-size:14px; font-weight:800; letter-spacing:.3px;
+}
+.vs-card-header.gray-hd { background:var(--cream3); color:var(--gray2); }
+.vs-card-header.green-hd { background:var(--green-dark); color:var(--white); }
+.vs-card-body { padding:16px 18px; background:var(--white); }
+.vs-item {
+  display:flex; align-items:center; gap:10px;
+  font-size:13px; color:var(--gray2); padding:5px 0;
+  border-bottom:1px solid var(--cream2);
+}
+.vs-item:last-child { border-bottom:none; }
+.vs-item.green-item { color:var(--text); font-weight:500; }
+.vs-dot { width:6px; height:6px; border-radius:50%; background:var(--cream3); flex-shrink:0; }
+.vs-dot.green { background:var(--green-accent); }
+.vs-badge {
+  text-align:center; font-family:'Montserrat',sans-serif;
+  font-size:22px; font-weight:900; color:var(--green-mid);
+  background:var(--cream);
+  border:2px solid var(--green-mid);
+  width:50px; height:50px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  flex-shrink:0;
+}
+@media(max-width:600px){
+  .vs-grid { grid-template-columns:1fr; }
+  .vs-badge { margin:0 auto; }
+}
+
+/* ── TARGET ── */
+.target-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));
+  gap:12px; margin-top:4px;
+}
+.target-card {
+  background:var(--white); border-radius:var(--r);
+  border:1px solid var(--cream3); padding:20px;
+  box-shadow:0 2px 8px rgba(13,43,31,0.04);
+  transition:.25s;
+}
+.target-card:hover { border-color:rgba(46,139,87,0.3); }
+.target-card-num {
+  font-family:'Montserrat',sans-serif;
+  font-size:32px; font-weight:900;
+  color:var(--green-mid); opacity:.2; line-height:1; margin-bottom:10px;
+}
+.target-card-title { font-size:15px; font-weight:800; color:var(--text); margin-bottom:6px; }
+.target-card-desc { font-size:13px; color:var(--gray2); line-height:1.65; }
+
+/* ── FOOTER ── */
+footer {
+  background:var(--green-deep);
+  border-top:2px solid var(--gold);
+  padding:clamp(20px,3vw,28px) var(--px);
+  display:flex; align-items:center;
+  justify-content:space-between; flex-wrap:wrap; gap:16px;
+}
+.footer-logo { display:flex; align-items:center; gap:14px; }
+.logo-mark {
+  width:40px; height:40px;
+  border:2px solid var(--gold); border-radius:6px;
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Montserrat',sans-serif;
+  font-size:11px; font-weight:900; color:var(--gold);
+}
+.logo-name {
+  font-family:'Montserrat',sans-serif;
+  font-size:13px; font-weight:700;
+  color:rgba(245,242,235,0.8); letter-spacing:1px;
+}
+.logo-tagline {
+  font-family:'Montserrat',sans-serif;
+  font-size:8px; color:rgba(245,242,235,0.4);
+  letter-spacing:2.5px; margin-top:2px;
+}
+.footer-cta { text-align:center; }
+.cta-main {
+  font-family:'Montserrat','Noto Sans KR',sans-serif;
+  font-size:clamp(13px,2vw,16px);
+  font-weight:700; color:var(--gold-light); letter-spacing:-.3px;
+}
+.cta-sub { font-size:12px; color:rgba(255,255,255,0.45); margin-top:3px; }
+.footer-contact { text-align:right; }
+.contact-line { font-size:13px; color:rgba(245,242,235,0.75); padding:3px 0; }
+.contact-line strong { color:var(--white); font-size:15px; }
+
+/* ── ANIMATIONS ── */
+.fade-up { opacity:0; transform:translateY(22px); transition:opacity .6s ease, transform .6s ease; }
+.fade-up.visible { opacity:1; transform:none; }
+@keyframes fu { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:none} }
+@keyframes fi { from{opacity:0} to{opacity:1} }
+
+/* ── RESPONSIVE ── */
+@media(max-width:480px){
+  .hero { padding:50px 20px 44px; min-height:auto; }
+  .hero-title { font-size:clamp(30px,10vw,44px); }
+  .scroll-ind { display:none; }
+  .section-wrap,.achieve-section,.story-section,.vs-section { padding:36px 20px; }
+  .section-title { font-size:26px; }
+  .what-grid,.target-grid { grid-template-columns:1fr; }
+  .achieve-grid { grid-template-columns:repeat(2,1fr); }
+  footer { flex-direction:column; text-align:center; }
+  .footer-contact { text-align:center; }
+}
+@media(min-width:1200px){ body { max-width:1200px; margin:0 auto; } }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-eyebrow">Creative Coding Academy · High School Program</div>
+  <div class="hero-title">
+    좋은 학교에 다닌다는 이유로 <em>수시를 포기</em>하지 마세요.
+  </div>
+  <div class="hero-sub-row">
+    <div class="hero-line"></div>
+    <p class="hero-sub">학생부 속 강점을 발견하고, 합격으로 연결합니다<br>학생부 데이터 분석 기반 진학 전략 컨설팅</p>
+  </div>
+  <div class="scroll-ind">
+    <div class="scroll-bar"></div>
+    <div class="scroll-lbl">Scroll</div>
+  </div>
+</section>
+
+<!-- ══ GREEN BAR ══ -->
+<div class="green-bar">
+  <div class="bar-item">학생부 3년 정밀 분석</div>
+  <div class="bar-item">학생의 강점 발견</div>
+  <div class="bar-item">전공 적합성 분석</div>
+  <div class="bar-item">대학별 전략 수립</div>
+  <div class="bar-item">수시 6장 지원 전략 설계</div>
+</div>
+
+<!-- ══ RECRUIT BANNER ══ -->
+<div class="recruit-banner fade-up">
+  <div class="recruit-inner">
+    <div>
+      <div class="recruit-badge">고등부 컨설팅 안내</div>
+      <div class="recruit-title">성적은 숫자입니다.<br><em>학생부는 이야기입니다.</em></div>
+      <div class="recruit-sub">학생부는 기록이 아닙니다. 가능성을 읽는 데이터입니다.<br>내신만으로는 설명할 수 없는 경쟁력이 학생부 안에 있습니다.</div>
+    </div>
+    <div class="recruit-contact">
+      <div class="recruit-contact-item">
+        <div class="recruit-contact-label">대상</div>
+        <div class="recruit-contact-value">수시 준비 고등학생</div>
+      </div>
+      <div class="recruit-contact-item">
+        <div class="recruit-contact-label">모집</div>
+        <div class="recruit-contact-value">상시 모집 (상담 및 분석 예약)</div>
+      </div>
+      <div class="recruit-contact-item">
+        <div class="recruit-contact-label">수업</div>
+        <div class="recruit-contact-value">1:1 맞춤 진학 전략 컨설팅</div>
+      </div>
+      <div class="recruit-contact-item">
+        <div class="recruit-contact-label">전화</div>
+        <div class="recruit-contact-value"><strong>010-5697-6560</strong></div>
+      </div>
+      <div class="recruit-contact-item">
+        <div class="recruit-contact-label">카톡</div>
+        <div class="recruit-contact-value">creativecoding</div>
+      </div>
+      <div class="recruit-contact-item">
+        <div class="recruit-contact-label">위치</div>
+        <div class="recruit-contact-value">대치동 939-5, 202호</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PAIN POINTS ══ -->
+<section class="section-wrap fade-up">
+  <div class="section-header">
+    <div class="section-eyebrow">Common Concerns</div>
+    <div class="section-title">이런 고민 있으신가요?</div>
+  </div>
+  <div class="pain-grid">
+    <div class="pain-item"><div class="pain-check">✓</div><div class="pain-text">모의고사는 잘 나오는데 내신이 아쉽다</div></div>
+    <div class="pain-item"><div class="pain-check">✓</div><div class="pain-text">특목고·자사고라 등급이 불리하다</div></div>
+    <div class="pain-item"><div class="pain-check">✓</div><div class="pain-text">생기부를 어떻게 활용해야 할지 모르겠다</div></div>
+    <div class="pain-item"><div class="pain-check">✓</div><div class="pain-text">학생부종합전형을 포기해야 할지 고민된다</div></div>
+    <div class="pain-item"><div class="pain-check">✓</div><div class="pain-text">수시 6장을 모두 상향으로 쓰기 불안하다</div></div>
+    <div class="pain-item"><div class="pain-check">✓</div><div class="pain-text">AI·코딩 활동을 어떻게 입시에 연결할지 모른다</div></div>
+  </div>
+</section>
+
+<!-- ══ WHAT WE DO ══ -->
+<section class="section-wrap alt fade-up">
+  <div class="section-header">
+    <div class="section-eyebrow">Our Services</div>
+    <div class="section-title">우리가 하는 일</div>
+  </div>
+  <div class="what-grid">
+    <div class="what-card">
+      <div class="what-card-title">학생부 분석</div>
+      <ul class="what-list">
+        <li>세특 심층 분석</li>
+        <li>창체 활동 분석</li>
+        <li>독서 이력 연결</li>
+        <li>동아리·진로활동</li>
+      </ul>
+    </div>
+    <div class="what-card">
+      <div class="what-card-title">학생 강점 발견</div>
+      <ul class="what-list">
+        <li>탐구형 / 연구형</li>
+        <li>문제해결형</li>
+        <li>공학형</li>
+        <li>의료·생명형 / 융합형</li>
+      </ul>
+    </div>
+    <div class="what-card">
+      <div class="what-card-title">전공 적합성 분석</div>
+      <ul class="what-list">
+        <li>전공 관심도 확인</li>
+        <li>역량 연결성 분석</li>
+        <li>활동 일관성 점검</li>
+        <li>발전 가능성 평가</li>
+      </ul>
+    </div>
+    <div class="what-card">
+      <div class="what-card-title">대학별 전략 수립</div>
+      <ul class="what-list">
+        <li>학생부종합 전형</li>
+        <li>학생부교과 전형</li>
+        <li>논술 전형</li>
+        <li>정시 전략</li>
+      </ul>
+    </div>
+    <div class="what-card">
+      <div class="what-card-title">지원 포트폴리오 구성</div>
+      <ul class="what-list">
+        <li>안전 지원 1~2개</li>
+        <li>적정 지원 2~3개</li>
+        <li>상향 지원 1~2개</li>
+        <li>시나리오 시뮬레이션</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONSULTING PROCESS ══ -->
+<section class="section-wrap fade-up">
+  <div class="section-header">
+    <div class="section-eyebrow">Consulting Process</div>
+    <div class="section-title">실제 컨설팅 프로세스</div>
+  </div>
+  <div class="process-grid">
+    <div class="process-step">
+      <div class="process-step-num">STEP 1</div>
+      <div class="process-step-title">학생부<br>3년 분석</div>
+      <div class="process-step-desc">세특·창체·독서<br>전체 정밀 분석</div>
+      <div class="process-arrow">›</div>
+    </div>
+    <div class="process-step">
+      <div class="process-step-num">STEP 2</div>
+      <div class="process-step-title">학생 강점<br>진단</div>
+      <div class="process-step-desc">유형 분류 및<br>핵심 역량 도출</div>
+      <div class="process-arrow">›</div>
+    </div>
+    <div class="process-step highlight">
+      <div class="process-step-num">STEP 3</div>
+      <div class="process-step-title">전공 적합성<br>분석</div>
+      <div class="process-step-desc">전공 연결성<br>심층 검토</div>
+      <div class="process-arrow">›</div>
+    </div>
+    <div class="process-step">
+      <div class="process-step-num">STEP 4</div>
+      <div class="process-step-title">대학·학과<br>탐색</div>
+      <div class="process-step-desc">맞춤 대학<br>리스트업</div>
+      <div class="process-arrow">›</div>
+    </div>
+    <div class="process-step">
+      <div class="process-step-num">STEP 5</div>
+      <div class="process-step-title">수시 전략<br>수립</div>
+      <div class="process-step-desc">6장 배치<br>시나리오 설계</div>
+      <div class="process-arrow">›</div>
+    </div>
+    <div class="process-step highlight">
+      <div class="process-step-num">STEP 6</div>
+      <div class="process-step-title">지원 시나리오<br>설계</div>
+      <div class="process-step-desc">최종 지원<br>전략 완성</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ STORY ══ -->
+<section class="story-section fade-up">
+  <div class="story-inner">
+    <div class="story-left">
+      <div class="section-eyebrow" style="color:var(--gold);">Success Story</div>
+      <div class="story-quote">
+        수시 2.6등급으로<br><em>UNIST 합격</em> 스토리
+      </div>
+      <div class="story-body">
+        내신은 2.6등급이었지만, AI·프로그래밍 분야에 대한 꾸준한 탐구와 프로젝트 경험, 세특에 기록된 문제해결 과정, 전공 적합성이 강점이 되었습니다.<br><br>
+        학생부 분석을 통해 강점을 발견하고 맞춤형 지원 전략을 설계한 결과, UNIST 최종 합격!
+      </div>
+      <div class="story-highlight">
+        내신만으로는 설명할 수 없는 경쟁력이<br>학생부 안에 있었습니다.
+      </div>
+    </div>
+    <div class="story-right">
+      <div class="story-result-title">최근 진학 성과</div>
+      <div class="result-row">
+        <div class="result-school">울산과학기술원 (UNIST) 합격</div>
+        <div class="result-count">1명</div>
+      </div>
+      <div class="result-row">
+        <div class="result-school">중앙대학교 합격</div>
+        <div class="result-count">4명</div>
+      </div>
+      <div class="result-row">
+        <div class="result-school">숭실대학교 합격</div>
+        <div class="result-count">2명</div>
+      </div>
+      <div class="result-row">
+        <div class="result-school">한국교원대학교 컴퓨터교육과 합격</div>
+        <div class="result-count">1명</div>
+      </div>
+      <div class="result-row">
+        <div class="result-school">과학기술원 (KAIST·GIST·DGIST·UNIST) 합격</div>
+        <div class="result-count">2명</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ VS ══ -->
+<section class="vs-section fade-up">
+  <div class="section-header">
+    <div class="section-eyebrow">Our Difference</div>
+    <div class="section-title">일반 입시 상담 vs 우리의 차별화된 컨설팅</div>
+  </div>
+  <div class="vs-grid">
+    <div class="vs-card">
+      <div class="vs-card-header gray-hd">일반적인 입시 상담</div>
+      <div class="vs-card-body">
+        <div class="vs-item"><div class="vs-dot"></div>등급 확인</div>
+        <div class="vs-item"><div class="vs-dot"></div>대학 추천</div>
+        <div class="vs-item"><div class="vs-dot"></div>단순 조언</div>
+      </div>
+    </div>
+    <div class="vs-badge">VS</div>
+    <div class="vs-card">
+      <div class="vs-card-header green-hd">우리의 차별화된 컨설팅</div>
+      <div class="vs-card-body">
+        <div class="vs-item green-item"><div class="vs-dot green"></div>학생부 전체 분석</div>
+        <div class="vs-item green-item"><div class="vs-dot green"></div>학생 강점 발견</div>
+        <div class="vs-item green-item"><div class="vs-dot green"></div>진로 방향 설계</div>
+        <div class="vs-item green-item"><div class="vs-dot green"></div>대학 전략 수립</div>
+        <div class="vs-item green-item"><div class="vs-dot green"></div>지원 시나리오 작성</div>
+      </div>
+    </div>
+  </div>
+  <div style="margin-top:24px; padding:18px 22px; background:var(--green-dark); border-radius:var(--r); text-align:center;">
+    <div style="font-family:'Montserrat','Noto Sans KR',sans-serif; font-size:clamp(15px,2vw,18px); font-weight:700; color:var(--white);">
+      대회 실적 + 학교 성적 + 프로젝트, <em style="color:var(--gold-light);">세 가지를 연결해 특목고 합격까지!</em>
+    </div>
+    <div style="margin-top:8px; font-size:13px; color:rgba(255,255,255,0.55);">실력 + 실적 + 스토리 → 합격</div>
+  </div>
+</section>
+
+<!-- ══ TARGET ══ -->
+<section class="section-wrap alt fade-up">
+  <div class="section-header">
+    <div class="section-eyebrow">Who is this for</div>
+    <div class="section-title">이런 학생에게 추천합니다</div>
+  </div>
+  <div class="target-grid">
+    <div class="target-card"><div class="target-card-num">01</div><div class="target-card-title">전국대회에 도전하고 싶은 고등학생</div><div class="target-card-desc">AI·SW 프로젝트 실적을 입시와 연결하고 싶은 학생</div></div>
+    <div class="target-card"><div class="target-card-num">02</div><div class="target-card-title">SW·AI 프로젝트로 학생부를 채우고 싶은 학생</div><div class="target-card-desc">단순 스펙이 아닌 일관된 스토리로 학생부를 구성하고 싶은 학생</div></div>
+    <div class="target-card"><div class="target-card-num">03</div><div class="target-card-title">내신 불리함을 학종으로 극복하고 싶은 학생</div><div class="target-card-desc">특목고·자사고 재학생으로 등급이 불리하지만 학종으로 도전하고 싶은 학생</div></div>
+    <div class="target-card"><div class="target-card-num">04</div><div class="target-card-title">수시 6장 전략을 체계적으로 세우고 싶은 학생</div><div class="target-card-desc">안전·적정·상향 배치를 데이터 기반으로 설계하고 싶은 학생</div></div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-logo">
+    <div class="logo-mark">&lt;/&gt;</div>
+    <div>
+      <div class="logo-name">CREATIVE CODING ACADEMY</div>
+      <div class="logo-tagline">CREATE · CODE · COMPETE</div>
+    </div>
+  </div>
+  <div class="footer-cta">
+    <div class="cta-main">성적이 아닌, 당신의 가능성을 증명하세요</div>
+    <div class="cta-sub">고등부 학생부 데이터 분석 기반 진학 전략 컨설팅</div>
+  </div>
+  <div class="footer-contact">
+    <div class="contact-line"><strong>010-5697-6560</strong></div>
+    <div class="contact-line">Creative Coding & Art Education Center</div>
+    <div class="contact-line">대치동 939-5, 202호</div>
+  </div>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-up').forEach((el, i) => {
+  el.style.transitionDelay = (i % 4) * 70 + 'ms';
+  observer.observe(el);
+});
+</script>
+</body>
+</html>
