@@ -72,21 +72,21 @@ nav{position:sticky;top:0;z-index:200;background:rgba(13,17,23,0.97);backdrop-fi
   .hero{padding:60px 24px 100px}
 }
 .hero-card{border-radius:22px;padding:30px 20px;cursor:pointer;transition:transform .35s cubic-bezier(.34,1.56,.64,1),box-shadow .3s ease,border-color .3s ease,background .3s ease;text-align:center;color:inherit;text-decoration:none;display:block;}
-.hc-elem{border:1.5px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.05)}
-.hc-mid{border:1.5px solid rgba(150,120,255,0.3);background:rgba(100,80,200,0.1)}
-.hc-high{border:1.5px solid rgba(60,200,140,0.3);background:rgba(30,160,110,0.08)}
+.hc-elem{border:3px solid rgba(255,255,255,0.3);background:rgba(255,255,255,0.05)}
+.hc-mid{border:3px solid rgba(255,255,255,0.3);background:rgba(255,255,255,0.05)}
+.hc-high{border:3px solid rgba(255,255,255,0.3);background:rgba(255,255,255,0.05)}
 .hero-card:hover{transform:translateY(-12px) scale(1.03)}
-.hc-elem:hover{background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.38);box-shadow:0 24px 55px rgba(255,255,255,0.08)}
-.hc-mid:hover{background:rgba(120,90,230,0.18);border-color:rgba(170,140,255,0.6);box-shadow:0 24px 55px rgba(130,100,255,0.2)}
-.hc-high:hover{background:rgba(40,180,130,0.16);border-color:rgba(80,210,160,0.6);box-shadow:0 24px 55px rgba(50,200,140,0.2)}
+.hc-elem:hover{background:rgba(255,255,255,0.12);border-color:rgba(255,255,255,0.55);box-shadow:0 24px 55px rgba(255,255,255,0.1)}
+.hc-mid:hover{background:rgba(255,255,255,0.12);border-color:rgba(255,255,255,0.55);box-shadow:0 24px 55px rgba(255,255,255,0.1)}
+.hc-high:hover{background:rgba(255,255,255,0.12);border-color:rgba(255,255,255,0.55);box-shadow:0 24px 55px rgba(255,255,255,0.1)}
 .hc-tag{font-family:var(--ff);display:inline-block;font-size:9px;font-weight:700;letter-spacing:2px;padding:3px 10px;border-radius:999px;margin-bottom:14px;text-transform:uppercase}
 .hc-elem .hc-tag{background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.5)}
-.hc-mid .hc-tag{background:rgba(140,110,255,0.2);color:rgba(190,165,255,0.95)}
-.hc-high .hc-tag{background:rgba(50,200,140,0.18);color:rgba(100,225,175,0.95)}
+.hc-mid .hc-tag{background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.5)}
+.hc-high .hc-tag{background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.5)}
 .hero-card h2{font-family:var(--ff);font-size:21px;font-weight:800;margin-bottom:10px;line-height:1.2}
-.hc-elem h2{color:#f5f5f5}.hc-mid h2{color:#cdbfff}.hc-high h2{color:#88f0cc}
+.hc-elem h2{color:#f5f5f5}.hc-mid h2{color:#f5f5f5}.hc-high h2{color:#f5f5f5}
 .hero-card p{font-family:var(--ff);font-size:13.5px;line-height:1.8;word-break:keep-all}
-.hc-elem p{color:rgba(255,255,255,0.65)}.hc-mid p{color:rgba(200,185,255,0.75)}.hc-high p{color:rgba(150,235,200,0.75)}
+.hc-elem p{color:rgba(255,255,255,0.65)}.hc-mid p{color:rgba(255,255,255,0.65)}.hc-high p{color:rgba(255,255,255,0.65)}
 
 .scroll-indicator{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fi 1s 1.4s ease forwards;}
 .scroll-bar{width:1px;height:32px;background:rgba(255,255,255,0.2);animation:scrollAnim 1.8s ease-in-out infinite}
@@ -184,13 +184,13 @@ footer{background:var(--ink);padding:28px 48px;border-top:0.5px solid var(--line
         <p>한국코드페어·전국대회 준비<br/>아이디어 발굴부터 작품 제작, 발표까지</p>
       </a>
 
-      <a href="middle_school.html" class="hero-card hc-elem">
+      <a href="middle_school.html" class="hero-card hc-mid">
         <span class="hc-tag">Middle School</span>
         <h2>중등부</h2>
         <p>디미고·과학고·국제학교 준비<br/>AI 프로젝트와 자기소개서 방향 설계</p>
       </a>
 
-      <a href="high_school.html" class="hero-card hc-elem">
+      <a href="high_school.html" class="hero-card hc-high">
         <span class="hc-tag">High School</span>
         <h2>고등부</h2>
         <p>생기부·세특·대입 컨설팅<br/>전공 적합성과 탐구 스토리 구성</p>
