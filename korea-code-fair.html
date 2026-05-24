@@ -234,8 +234,9 @@ summary.year-summary::-webkit-details-marker{display:none}
 .visual-head .eyebrow{margin-bottom:20px;color:#c6aa67}
 .visual-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(34px,3.8vw,56px);font-weight:400;letter-spacing:2px;line-height:1.05;color:#2c2924}
 .visual-sub{margin-top:10px;font-size:18px;font-weight:300;color:#9a9084}
-.award-showcase{display:flex;flex-direction:column;gap:12px;margin-top:24px}
-.rank-row{display:grid;grid-template-columns:190px 1fr;min-height:138px;border:0.5px solid rgba(122,95,42,.22);border-radius:10px;overflow:hidden;background:rgba(255,255,255,.72);box-shadow:0 10px 28px rgba(42,39,34,.04)}
+.award-showcase{display:flex;flex-direction:column;gap:0;margin-top:24px}
+.rank-row{display:grid;grid-template-columns:190px 1fr;min-height:138px;border:0.5px solid rgba(122,95,42,.22);border-radius:10px;overflow:hidden;background:rgba(255,255,255,.72);box-shadow:0 10px 28px rgba(42,39,34,.04);align-items:stretch}
+.rank-row + .rank-row{margin-top:24px}
 .rank-label{display:flex;align-items:center;justify-content:center;gap:18px;background:linear-gradient(90deg,#faf5e9 0%,#fffaf1 100%);border-right:0.5px solid rgba(122,95,42,.12)}
 .medal-icon{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:30px;background:#fffaf0;border:1px solid rgba(196,164,90,.28)}
 .rank-name{font-family:'Bebas Neue',sans-serif;font-size:28px;color:#b58b28;line-height:1.1;letter-spacing:1px}
@@ -376,7 +377,6 @@ summary.year-summary::-webkit-details-marker{display:none}
           </div>
         </div>
       </div>
-    </div>
 
       <!-- 동상 -->
       <div class="rank-row">
