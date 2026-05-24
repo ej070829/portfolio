@@ -358,8 +358,11 @@ body::before {
 
 /* project grid */
 .project-grid {
-  display:grid; grid-template-columns:1fr 1fr;
+  display:grid; grid-template-columns:repeat(4,1fr);
   gap:8px;
+}
+@media(max-width:860px){
+  .project-grid { grid-template-columns:repeat(2,1fr); }
 }
 .project-item {
   background:var(--charcoal3);
