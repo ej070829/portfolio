@@ -293,7 +293,7 @@ body {
 .story-left {}
 .story-quote {
   font-family:'Montserrat','Noto Sans KR',sans-serif;
-  font-size:clamp(28px,4vw,46px);
+  font-size:clamp(29px,4vw,47px);
   font-weight:900; color:var(--white);
   line-height:1.25; margin-bottom:24px;
   letter-spacing:-1px;
@@ -335,6 +335,7 @@ body {
   background:rgba(46,139,87,0.3);
   border:1px solid rgba(46,139,87,0.5);
   color:#7FD4A0; padding:4px 14px; border-radius:4px;
+  white-space:nowrap; flex-shrink:0;
 }
 @media(max-width:700px){
   .story-inner { grid-template-columns:1fr; gap:28px; }
@@ -382,27 +383,27 @@ body {
   border:1px solid var(--cream3);
 }
 .vs-card-header {
-  padding:14px 18px;
-  font-size:14px; font-weight:800; letter-spacing:.3px;
+  padding:16px 20px;
+  font-size:18px; font-weight:800; letter-spacing:.3px;
 }
 .vs-card-header.gray-hd { background:var(--cream3); color:var(--gray2); }
 .vs-card-header.green-hd { background:var(--green-dark); color:var(--white); }
-.vs-card-body { padding:16px 18px; background:var(--white); }
+.vs-card-body { padding:18px 20px; background:var(--white); }
 .vs-item {
   display:flex; align-items:center; gap:10px;
-  font-size:13px; color:var(--gray2); padding:5px 0;
+  font-size:16px; color:var(--gray2); padding:8px 0;
   border-bottom:1px solid var(--cream2);
 }
 .vs-item:last-child { border-bottom:none; }
-.vs-item.green-item { color:var(--text); font-weight:500; }
-.vs-dot { width:6px; height:6px; border-radius:50%; background:var(--cream3); flex-shrink:0; }
+.vs-item.green-item { color:var(--text); font-weight:600; }
+.vs-dot { width:7px; height:7px; border-radius:50%; background:var(--cream3); flex-shrink:0; }
 .vs-dot.green { background:var(--green-accent); }
 .vs-badge {
   text-align:center; font-family:'Montserrat',sans-serif;
-  font-size:22px; font-weight:900; color:var(--green-mid);
+  font-size:24px; font-weight:900; color:var(--green-mid);
   background:var(--cream);
   border:2px solid var(--green-mid);
-  width:50px; height:50px; border-radius:50%;
+  width:56px; height:56px; border-radius:50%;
   display:flex; align-items:center; justify-content:center;
   flex-shrink:0;
 }
@@ -426,11 +427,11 @@ body {
 .target-card:hover { border-color:rgba(46,139,87,0.3); }
 .target-card-num {
   font-family:'Montserrat',sans-serif;
-  font-size:32px; font-weight:900;
+  font-size:35px; font-weight:900;
   color:var(--green-mid); opacity:.2; line-height:1; margin-bottom:10px;
 }
-.target-card-title { font-size:15px; font-weight:800; color:var(--text); margin-bottom:6px; }
-.target-card-desc { font-size:13px; color:var(--gray2); line-height:1.65; }
+.target-card-title { font-size:18px; font-weight:800; color:var(--text); margin-bottom:6px; }
+.target-card-desc { font-size:16px; color:var(--gray2); line-height:1.65; }
 
 /* ── FOOTER ── */
 footer {
@@ -740,11 +741,11 @@ footer {
       </div>
     </div>
   </div>
-  <div style="margin-top:24px; padding:18px 22px; background:var(--green-dark); border-radius:var(--r); text-align:center;">
-    <div style="font-family:'Montserrat','Noto Sans KR',sans-serif; font-size:clamp(15px,2vw,18px); font-weight:700; color:var(--white);">
+  <div style="margin-top:24px; padding:22px 26px; background:var(--green-dark); border-radius:var(--r); text-align:center;">
+    <div style="font-family:'Montserrat','Noto Sans KR',sans-serif; font-size:clamp(16px,2vw,22px); font-weight:800; color:var(--white);">
       대회 실적 + 학교 성적 + 프로젝트, <em style="color:var(--gold-light);">세 가지를 연결해 특목고 합격까지!</em>
     </div>
-    <div style="margin-top:8px; font-size:13px; color:rgba(255,255,255,0.55);">실력 + 실적 + 스토리 → 합격</div>
+    <div style="margin-top:10px; font-size:16px; color:rgba(255,255,255,0.65);">실력 + 실적 + 스토리 → 합격</div>
   </div>
 </section>
 
