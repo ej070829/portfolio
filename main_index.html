@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Lee Eunjin — Portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Playfair+Display:wght@700;900&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet"/>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -110,7 +110,7 @@ nav{position:sticky;top:0;z-index:200;background:rgba(13,17,23,0.97);backdrop-fi
 .why-coding-title{font-family:var(--ff);font-size:clamp(26px,3.5vw,44px);font-weight:900;letter-spacing:-1.5px;line-height:1.1;color:var(--ink);}
 .why-coding-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1.5px solid var(--ink4);}
 @media(max-width:760px){.why-coding-grid{grid-template-columns:1fr;}}
-.wc-card{padding:40px 36px;border-right:1.5px solid var(--ink4);background:var(--ivory3);transition:.3s;}
+.wc-card{padding:40px 36px;border-right:1.5px solid var(--ink4);background:#fff;transition:.3s;}
 .wc-card:last-child{border-right:none;}
 @media(max-width:760px){.wc-card{border-right:none;border-bottom:1.5px solid var(--ink4);}.wc-card:last-child{border-bottom:none;}}
 .wc-card--mid{background:rgba(122,95,42,0.04);}
@@ -142,7 +142,7 @@ nav{position:sticky;top:0;z-index:200;background:rgba(13,17,23,0.97);backdrop-fi
 .roadmap-header{margin-bottom:52px;}
 .roadmap-sec .eyebrow{color:var(--gold);}
 .roadmap-title{font-family:var(--ff);font-size:clamp(24px,3vw,40px);font-weight:900;letter-spacing:-1.5px;line-height:1.1;color:var(--ink);}
-.roadmap-num{font-style:normal;font-size:clamp(52px,6vw,88px);color:var(--gold);letter-spacing:-3px;line-height:0.9;vertical-align:middle;}
+.roadmap-num{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(36px,4vw,58px);color:var(--gold);letter-spacing:-1px;line-height:1;vertical-align:middle;margin:0 4px;}
 .roadmap-grid{display:grid;grid-template-columns:1fr auto 1fr auto 1fr auto 1fr;gap:0;align-items:stretch;}
 @media(max-width:900px){.roadmap-grid{grid-template-columns:1fr 1fr;gap:12px;}.rm-arrow{display:none;}}
 @media(max-width:520px){.roadmap-grid{grid-template-columns:1fr;gap:8px;}.rm-arrow{display:flex;transform:rotate(90deg);padding:4px 0;}}
