@@ -98,9 +98,9 @@ nav{position:sticky;top:0;z-index:200;background:rgba(13,17,23,0.97);backdrop-fi
 @keyframes scrollAnim{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
 /* HERO BUTTONS */
 .hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:32px;opacity:0;animation:fu .8s .55s ease forwards;}
-.hero-btn-primary{font-family:var(--ff);font-size:14px;font-weight:700;letter-spacing:1.5px;padding:14px 30px;background:var(--gold2);color:#0D1117;border-radius:2px;transition:.2s;white-space:nowrap;}
-.hero-btn-primary:hover{background:#e0bc6a;transform:translateY(-2px);}
-.hero-btn-outline{font-family:var(--ff);font-size:14px;font-weight:500;letter-spacing:1.5px;padding:13px 28px;background:transparent;color:rgba(255,255,255,0.8);border:0.5px solid rgba(255,255,255,0.35);border-radius:2px;transition:.2s;white-space:nowrap;}
+.hero-btn-primary{font-family:var(--ff);font-size:14px;font-weight:700;letter-spacing:1.5px;padding:14px 32px;background:var(--gold2);color:#0D1117;border-radius:2px;transition:.2s;white-space:nowrap;border:1.5px solid var(--gold2);}
+.hero-btn-primary:hover{background:#e0bc6a;border-color:#e0bc6a;transform:translateY(-2px);}
+.hero-btn-outline{font-family:var(--ff);font-size:14px;font-weight:500;letter-spacing:1.5px;padding:14px 32px;background:transparent;color:rgba(255,255,255,0.8);border:1.5px solid rgba(255,255,255,0.35);border-radius:2px;transition:.2s;white-space:nowrap;}
 .hero-btn-outline:hover{border-color:rgba(255,255,255,0.75);color:#fff;transform:translateY(-2px);}
 
 /* WHY CODING NOW */
@@ -108,11 +108,11 @@ nav{position:sticky;top:0;z-index:200;background:rgba(13,17,23,0.97);backdrop-fi
 .why-coding-header{margin-bottom:52px;}
 .why-coding-sec .eyebrow{color:var(--gold);}
 .why-coding-title{font-family:var(--ff);font-size:clamp(26px,3.5vw,44px);font-weight:900;letter-spacing:-1.5px;line-height:1.1;color:var(--ink);}
-.why-coding-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:0.5px solid var(--line);}
+.why-coding-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1.5px solid var(--ink4);}
 @media(max-width:760px){.why-coding-grid{grid-template-columns:1fr;}}
-.wc-card{padding:40px 36px;border-right:0.5px solid var(--line);transition:.3s;}
+.wc-card{padding:40px 36px;border-right:1.5px solid var(--ink4);background:var(--ivory3);transition:.3s;}
 .wc-card:last-child{border-right:none;}
-@media(max-width:760px){.wc-card{border-right:none;border-bottom:0.5px solid var(--line);}.wc-card:last-child{border-bottom:none;}}
+@media(max-width:760px){.wc-card{border-right:none;border-bottom:1.5px solid var(--ink4);}.wc-card:last-child{border-bottom:none;}}
 .wc-card--mid{background:rgba(122,95,42,0.04);}
 .wc-icon{font-size:32px;margin-bottom:20px;}
 .wc-title{font-family:var(--ff);font-size:clamp(18px,1.8vw,22px);font-weight:900;letter-spacing:-0.5px;color:#0D1117;margin-bottom:14px;}
@@ -145,6 +145,7 @@ nav{position:sticky;top:0;z-index:200;background:rgba(13,17,23,0.97);backdrop-fi
 .roadmap-num{font-style:normal;font-size:clamp(52px,6vw,88px);color:var(--gold);letter-spacing:-3px;line-height:0.9;vertical-align:middle;}
 .roadmap-grid{display:grid;grid-template-columns:1fr auto 1fr auto 1fr auto 1fr;gap:0;align-items:stretch;}
 @media(max-width:900px){.roadmap-grid{grid-template-columns:1fr 1fr;gap:12px;}.rm-arrow{display:none;}}
+@media(max-width:520px){.roadmap-grid{grid-template-columns:1fr;gap:8px;}.rm-arrow{display:flex;transform:rotate(90deg);padding:4px 0;}}
 @media(max-width:520px){.roadmap-grid{grid-template-columns:1fr;}}
 .rm-arrow{display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:18px;padding:0 8px;align-self:center;}
 .rm-card{background:#fff;border:0.5px solid var(--line);border-radius:2px;padding:28px 24px;display:flex;flex-direction:column;gap:10px;transition:.3s;}
@@ -216,11 +217,13 @@ nav{position:sticky;top:0;z-index:200;background:rgba(13,17,23,0.97);backdrop-fi
 .reveal.visible,.reveal-dk.visible{opacity:1;transform:none;}
 
 /* SUMMARY FILE LINKS */
-.file-row{display:flex;align-items:center;justify-content:space-between;padding:16px 22px;border-bottom:0.5px solid var(--line);font-family:var(--ff);font-size:17px;font-weight:500;color:var(--ink2);transition:.2s;text-decoration:none}
-.file-row:last-child{border-bottom:none}
-.file-row:hover{background:var(--ivory3);color:var(--ink);padding-left:28px}
-.file-arrow{font-size:15px;color:var(--ink4);flex-shrink:0;transition:.2s}
-.file-row:hover .file-arrow{color:var(--ink2)}
+.file-row{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border:1.5px solid var(--ink3);border-radius:6px;font-family:var(--ff);font-size:16px;font-weight:600;color:var(--ink2);transition:.2s;text-decoration:none;background:var(--ivory);cursor:pointer;}
+.file-row:last-child{border-bottom:1.5px solid var(--ink3)}
+.file-row:hover{background:var(--ink);color:var(--ivory);border-color:var(--ink);transform:translateY(-2px);box-shadow:0 4px 16px rgba(42,39,34,0.15);}
+.file-arrow{font-size:14px;color:var(--ink4);flex-shrink:0;transition:.2s;}
+.file-row:hover .file-arrow{color:var(--ivory2);}
+.file-detail{font-size:12px;font-weight:500;letter-spacing:1px;color:var(--ink4);margin-right:0px;transition:.2s;}
+.file-row:hover .file-detail{color:var(--ivory2);}
 
 /* ABOUT */
 .about-layout{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line-dk);border:0.5px solid var(--line-dk)}
@@ -491,18 +494,18 @@ footer{background:#0D1117;padding:28px 48px;border-top:0.5px solid rgba(255,255,
 <section class="sec" id="summary">
   <div class="wrap">
     <div class="sec-header reveal">
-      <div class="eyebrow">Educational Consulting Programs</div>
+      <div class="eyebrow" style="font-size:18px;letter-spacing:2px;text-transform:none;font-weight:900;color:var(--ink);">10년간의 실적</div>
       <div class="sec-title">학생 맞춤 프로그램</div>
       <div class="sec-lead">각 영역을 클릭하면 상세 페이지로 이동합니다.</div>
     </div>
-    <div class="reveal" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:0;border:0.5px solid var(--line)">
-      <a class="file-row" href="korea-code-fair.html">한국코드페어 지도 <span class="file-arrow">↗</span></a>
-      <a class="file-row" href="isef_international_page/isef-track.html">국제대회 지도 <span class="file-arrow">↗</span></a>
-      <a class="file-row" href="pdf/경시부문_지도실적.pdf">정보올림피아드 <span class="file-arrow">↗</span></a>
-      <a class="file-row" href="research-paper-guidance.html">소논문 지도 <span class="file-arrow">↗</span></a>
-      <a class="file-row" href="consulting.html">입시 컨설팅 <span class="file-arrow">↗</span></a>
-      <a class="file-row" href="books_responsive.html">코딩 교재 출판 <span class="file-arrow">↗</span></a>
-      <a class="file-row" href="results.html">진학 지도 <span class="file-arrow">↗</span></a>
+    <div class="reveal" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;">
+      <a class="file-row" href="korea-code-fair.html">한국코드페어 지도 <span class="file-detail">자세히 보기</span><span class="file-arrow">↗</span></a>
+      <a class="file-row" href="isef_international_page/isef-track.html">국제대회 지도 <span class="file-detail">자세히 보기</span><span class="file-arrow">↗</span></a>
+      <a class="file-row" href="pdf/경시부문_지도실적.pdf">정보올림피아드 <span class="file-detail">자세히 보기</span><span class="file-arrow">↗</span></a>
+      <a class="file-row" href="research-paper-guidance.html">소논문 지도 <span class="file-detail">자세히 보기</span><span class="file-arrow">↗</span></a>
+      <a class="file-row" href="consulting.html">입시 컨설팅 <span class="file-detail">자세히 보기</span><span class="file-arrow">↗</span></a>
+      <a class="file-row" href="books_responsive.html">코딩 교재 출판 <span class="file-detail">자세히 보기</span><span class="file-arrow">↗</span></a>
+      <a class="file-row" href="results.html">진학 지도 <span class="file-detail">자세히 보기</span><span class="file-arrow">↗</span></a>
     </div>
   </div>
 </section>
