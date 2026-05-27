@@ -13,7 +13,7 @@ html{scroll-behavior:smooth}
   --ivory:#F2EFE9;--ivory2:#EAE6DE;--ivory3:#E0DBD1;
   --ink:#2A2722;--ink2:#524D47;--ink3:#8A7F74;--ink4:#B5AFA8;
   --line:rgba(90,82,72,0.16);--line-dk:rgba(242,239,233,0.1);
-  --gold:#7A5F2A;--gold2:#C4A45A;
+  --gold:#5a4010;--gold2:#C4A45A;
   --ff:'Cormorant Garamond','Noto Sans KR',sans-serif;
 }
 body{font-family:var(--ff);background:var(--ivory);color:var(--ink);-webkit-font-smoothing:antialiased;line-height:1.7}
@@ -44,8 +44,10 @@ nav{position:sticky;top:0;z-index:200;background:rgba(13,17,23,0.97);backdrop-fi
 .hero-content{position:relative;z-index:2;text-align:center;max-width:960px;width:100%}
 
 .hero-label{font-family:var(--ff);font-size:11px;letter-spacing:5px;color:rgba(255,255,255,0.35);text-transform:uppercase;margin-bottom:40px;font-weight:300;opacity:0;animation:fu .8s .1s ease forwards;}
-.hero-title{font-family:var(--ff);font-size:clamp(42px,6.5vw,78px);font-weight:900;letter-spacing:-2px;color:#fff;line-height:1.12;margin-bottom:28px;opacity:0;animation:fu .9s .25s ease forwards;}
+.hero-title{font-family:var(--ff);font-size:clamp(38px,6vw,74px);font-weight:900;letter-spacing:-2px;color:#fff;line-height:1.12;margin-bottom:28px;}
 .hero-title em{font-style:normal;color:rgba(255,255,255,0.4)}
+.hero-title-line1{opacity:0;animation:fu .8s .15s ease forwards;}
+.hero-title-line2{opacity:0;animation:fu .8s .4s ease forwards;}
 
 .hero-desc{font-family:var(--ff);font-size:clamp(15px,1.9vw,19px);font-weight:400;color:rgba(255,255,255,0.65);line-height:1.85;max-width:680px;margin:0 auto;word-break:keep-all;}
 .hero-desc .word{display:inline-block;opacity:0;transform:translateY(12px);transition:opacity .4s ease, transform .4s ease;}
@@ -87,18 +89,84 @@ nav{position:sticky;top:0;z-index:200;background:rgba(13,17,23,0.97);backdrop-fi
 .hc-elem h2{color:#f5f5f5}.hc-mid h2{color:#f5f5f5}.hc-high h2{color:#f5f5f5}
 .hero-card p{font-family:var(--ff);font-size:13.5px;line-height:1.8;word-break:keep-all}
 .hc-elem p{color:rgba(255,255,255,0.65)}.hc-mid p{color:rgba(255,255,255,0.65)}.hc-high p{color:rgba(255,255,255,0.65)}
+.hc-arrow{font-family:var(--ff);font-size:12px;letter-spacing:1.5px;color:rgba(255,255,255,0.35);margin-top:16px;transition:.25s;display:inline-block;}
+.hero-card:hover .hc-arrow{color:var(--gold2);transform:translateX(5px);}
 
 .scroll-indicator{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fi 1s 1.4s ease forwards;}
 .scroll-bar{width:1px;height:32px;background:rgba(255,255,255,0.2);animation:scrollAnim 1.8s ease-in-out infinite}
 .scroll-lbl{font-family:var(--ff);font-size:9px;letter-spacing:3px;color:rgba(255,255,255,0.25);text-transform:uppercase}
 @keyframes scrollAnim{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+/* HERO BUTTONS */
+.hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:32px;opacity:0;animation:fu .8s .55s ease forwards;}
+.hero-btn-primary{font-family:var(--ff);font-size:14px;font-weight:700;letter-spacing:1.5px;padding:14px 30px;background:var(--gold2);color:#0D1117;border-radius:2px;transition:.2s;white-space:nowrap;}
+.hero-btn-primary:hover{background:#e0bc6a;transform:translateY(-2px);}
+.hero-btn-outline{font-family:var(--ff);font-size:14px;font-weight:500;letter-spacing:1.5px;padding:13px 28px;background:transparent;color:rgba(255,255,255,0.8);border:0.5px solid rgba(255,255,255,0.35);border-radius:2px;transition:.2s;white-space:nowrap;}
+.hero-btn-outline:hover{border-color:rgba(255,255,255,0.75);color:#fff;transform:translateY(-2px);}
+
+/* WHY CODING NOW */
+.why-coding-sec{background:var(--ivory);padding:88px 0 96px;border-top:0.5px solid var(--line);}
+.why-coding-header{margin-bottom:52px;}
+.why-coding-sec .eyebrow{color:var(--gold);}
+.why-coding-title{font-family:var(--ff);font-size:clamp(26px,3.5vw,44px);font-weight:900;letter-spacing:-1.5px;line-height:1.1;color:var(--ink);}
+.why-coding-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:0.5px solid var(--line);}
+@media(max-width:760px){.why-coding-grid{grid-template-columns:1fr;}}
+.wc-card{padding:40px 36px;border-right:0.5px solid var(--line);transition:.3s;}
+.wc-card:last-child{border-right:none;}
+@media(max-width:760px){.wc-card{border-right:none;border-bottom:0.5px solid var(--line);}.wc-card:last-child{border-bottom:none;}}
+.wc-card--mid{background:rgba(122,95,42,0.04);}
+.wc-icon{font-size:32px;margin-bottom:20px;}
+.wc-title{font-family:var(--ff);font-size:clamp(18px,1.8vw,22px);font-weight:900;letter-spacing:-0.5px;color:#0D1117;margin-bottom:14px;}
+.wc-desc{font-family:var(--ff);font-size:14.5px;color:#2A2722;line-height:1.9;font-weight:400;}
+
+/* 일주일 2시간 */
+.twohours-sec{background:#0a0f1a;padding:88px 0 96px;border-top:0.5px solid rgba(255,255,255,0.07);}
+.twohours-inner{display:grid;grid-template-columns:1fr 1.4fr;gap:64px;align-items:center;}
+@media(max-width:860px){.twohours-inner{grid-template-columns:1fr;gap:40px;}}
+.twohours-title{font-family:var(--ff);font-size:clamp(26px,3vw,42px);font-weight:900;letter-spacing:-1.5px;line-height:1.15;color:#fff;margin:16px 0 20px;}
+.twohours-num{font-style:normal;font-size:clamp(52px,6vw,88px);color:var(--gold2);letter-spacing:-3px;line-height:0.9;vertical-align:middle;}
+.twohours-desc{font-family:var(--ff);font-size:15px;color:rgba(255,255,255,0.45);line-height:1.9;font-weight:300;}
+.twohours-compare{display:grid;grid-template-columns:1fr auto 1fr;gap:0;border:0.5px solid rgba(255,255,255,0.1);border-radius:2px;overflow:hidden;}
+.tc-col{padding:28px 24px;display:flex;flex-direction:column;gap:10px;}
+.tc-col--all{background:rgba(255,255,255,0.02);}
+.tc-col--unique{background:rgba(196,164,90,0.05);}
+.tc-label{font-family:var(--ff);font-size:12px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-bottom:6px;font-weight:600;}
+.tc-label--gold{color:rgba(196,164,90,0.7);}
+.tc-item{font-family:var(--ff);font-size:15px;color:rgba(255,255,255,0.5);font-weight:400;padding:8px 0;border-bottom:0.5px solid rgba(255,255,255,0.06);}
+.tc-item:last-of-type{border-bottom:none;}
+.tc-item--gold{color:rgba(255,255,255,0.85);font-weight:600;}
+.tc-note{font-family:var(--ff);font-size:12px;color:rgba(255,255,255,0.25);line-height:1.7;margin-top:4px;font-weight:300;}
+.tc-vs{display:flex;align-items:center;justify-content:center;padding:0 16px;font-family:var(--ff);font-size:11px;letter-spacing:2px;color:rgba(255,255,255,0.15);font-weight:700;background:rgba(255,255,255,0.01);border-left:0.5px solid rgba(255,255,255,0.07);border-right:0.5px solid rgba(255,255,255,0.07);}
+
+/* ROADMAP */
+.roadmap-sec{background:var(--ivory2);padding:88px 0 96px;border-top:0.5px solid var(--line);}
+.roadmap-header{margin-bottom:52px;}
+.roadmap-sec .eyebrow{color:var(--gold);}
+.roadmap-title{font-family:var(--ff);font-size:clamp(24px,3vw,40px);font-weight:900;letter-spacing:-1.5px;line-height:1.1;color:var(--ink);}
+.roadmap-num{font-style:normal;font-size:clamp(52px,6vw,88px);color:var(--gold);letter-spacing:-3px;line-height:0.9;vertical-align:middle;}
+.roadmap-grid{display:grid;grid-template-columns:1fr auto 1fr auto 1fr auto 1fr;gap:0;align-items:stretch;}
+@media(max-width:900px){.roadmap-grid{grid-template-columns:1fr 1fr;gap:12px;}.rm-arrow{display:none;}}
+@media(max-width:520px){.roadmap-grid{grid-template-columns:1fr;}}
+.rm-arrow{display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:18px;padding:0 8px;align-self:center;}
+.rm-card{background:#fff;border:0.5px solid var(--line);border-radius:2px;padding:28px 24px;display:flex;flex-direction:column;gap:10px;transition:.3s;}
+.rm-card:hover{background:var(--ivory);border-color:var(--gold);}
+.rm-card--last{border-color:rgba(167,139,250,0.4);background:#fff;}
+.rm-stage{font-family:var(--ff);font-size:16px;font-weight:900;letter-spacing:1px;display:inline-block;padding:3px 10px;border-radius:2px;margin-bottom:4px;width:fit-content;}
+.rm-stage--elem{background:#1a3a5c;color:#fff;}
+.rm-stage--mid{background:#3d2e00;color:#fff;}
+.rm-stage--high{background:#0d3324;color:#fff;}
+.rm-stage--univ{background:#2d1f5e;color:#fff;}
+.rm-sub{font-family:var(--ff);font-size:13px;letter-spacing:3px;text-transform:uppercase;color:var(--ink4);font-weight:500;}
+.rm-desc{font-family:var(--ff);font-size:13.5px;color:var(--ink3);line-height:1.85;font-weight:300;}
+.rm-heading{font-family:var(--ff);font-size:clamp(20px,2vw,26px);font-weight:900;letter-spacing:-0.8px;line-height:1.2;color:var(--ink);margin-bottom:12px;}
+.rm-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+.rm-tags span{font-family:var(--ff);font-size:11px;padding:3px 8px;background:var(--ivory3);color:var(--ink3);border-radius:2px;letter-spacing:.5px;}
 @keyframes fu{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
 @keyframes fi{from{opacity:0}to{opacity:1}}
 
 /* WHY START SECTION */
 .why-sec{background:#0D1117;padding:88px 0 96px;border-top:0.5px solid rgba(255,255,255,0.07)}
 .why-sec-header{margin-bottom:56px}
-.why-sec-header .eyebrow{font-family:var(--ff);font-size:10px;letter-spacing:6px;text-transform:uppercase;font-weight:500;color:rgba(196,164,90,0.65);margin-bottom:14px}
+.why-sec-header .eyebrow{font-family:var(--ff);font-size:10px;letter-spacing:6px;text-transform:uppercase;font-weight:500;color:var(--gold);margin-bottom:14px}
 .why-sec-header .sec-title{font-family:var(--ff);font-size:clamp(28px,4vw,52px);font-weight:900;letter-spacing:-2px;line-height:1.1;color:#fff;margin-bottom:0}
 .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:0.5px solid rgba(255,255,255,0.1);max-width:1120px;margin:0 auto;width:calc(100% - 96px)}
 @media(max-width:960px){.why-grid{grid-template-columns:1fr;width:calc(100% - 44px)}}
@@ -137,8 +205,8 @@ nav{position:sticky;top:0;z-index:200;background:rgba(13,17,23,0.97);backdrop-fi
 .sec{padding:96px 0;border-top:0.5px solid var(--line)}
 .sec-dk{background:var(--ink);border-top:0.5px solid var(--line-dk)}
 .sec-header{margin-bottom:48px}
-.eyebrow{font-family:var(--ff);font-size:11px;letter-spacing:6px;text-transform:uppercase;font-weight:500;color:var(--gold2);margin-bottom:16px}
-.sec-dk .eyebrow{color:rgba(196,164,90,0.65)}
+.eyebrow{font-family:var(--ff);font-size:11px;letter-spacing:6px;text-transform:uppercase;font-weight:500;color:var(--gold);margin-bottom:16px}
+.sec-dk .eyebrow{color:var(--gold2)}
 .sec-title{font-family:var(--ff);font-size:clamp(32px,4vw,52px);font-weight:900;letter-spacing:-2px;line-height:1.1;color:var(--ink)}
 .sec-dk .sec-title{color:var(--ivory)}
 .sec-lead{font-family:var(--ff);font-size:16px;font-weight:300;color:var(--ink3);max-width:560px;line-height:1.85;margin-top:16px}
@@ -171,7 +239,18 @@ nav{position:sticky;top:0;z-index:200;background:rgba(13,17,23,0.97);backdrop-fi
 @media(max-width:700px){.contact-inner{grid-template-columns:1fr}}
 
 /* FOOTER */
-footer{background:var(--ink);padding:28px 48px;border-top:0.5px solid var(--line-dk)}
+/* SUB SECTIONS */
+.sub-section{border-top:0.5px solid rgba(255,255,255,0.1);}
+.sub-section-nav{background:#0D1117;padding:14px 48px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:58px;z-index:100;border-bottom:0.5px solid rgba(255,255,255,0.08);}
+.sub-section-label{font-family:var(--ff);font-size:11px;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,0.4);font-weight:500;}
+.sub-section-links{display:flex;gap:20px;}
+.sub-section-links a{font-family:var(--ff);font-size:12px;letter-spacing:1.5px;color:rgba(255,255,255,0.35);text-decoration:none;transition:.2s;}
+.sub-section-links a:hover{color:var(--gold2);}
+.sub-section-links .sub-top{color:rgba(255,255,255,0.2);}
+.sub-iframe{width:100%;border:none;display:block;min-height:100vh;}
+@media(max-width:700px){.sub-section-nav{padding:12px 20px;flex-direction:column;gap:8px;align-items:flex-start;}}
+
+footer{background:#0D1117;padding:28px 48px;border-top:0.5px solid rgba(255,255,255,0.07)}
 .footer-inner{max-width:1120px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
 .footer-logo{font-family:var(--ff);font-size:14px;font-weight:700;letter-spacing:4px;color:rgba(242,239,233,0.35);text-transform:uppercase}
 .footer-copy{font-family:var(--ff);font-size:11px;color:rgba(242,239,233,0.25);letter-spacing:0.3px}
@@ -206,39 +285,135 @@ footer{background:var(--ink);padding:28px 48px;border-top:0.5px solid var(--line
 <section class="hero" id="hero">
   <div class="hero-bg-glow"></div>
   <div class="hero-content">
-    <div class="hero-label">Lee Eunjin &nbsp;·&nbsp; Creative Coding &amp; Art</div>
+    <div class="hero-label">Creative Coding Art &nbsp;·&nbsp; AI 시대를 준비하는 창의융합 교육</div>
     <div class="hero-title">
-      AI·코딩 입시 전문<br/>
-      <em>컨설팅</em>
+      <div class="hero-title-line1">AI가 코딩하는 시대,</div>
+      <div class="hero-title-line2">왜 우리 아이는 <em>코딩을 배워야</em> 할까요?</div>
     </div>
-    <p class="hero-desc" id="heroDesc">초등 전국대회부터 중등 특목·국제학교 준비, 고등 생기부 컨설팅까지 학생의 아이디어를 프로젝트와 입시 포트폴리오로 연결합니다.</p>
-    <div class="hero-divider"></div>
-    <div class="hero-cards">
-
-      <!-- 초등부: creative_coding_academy_responsive.html 로 이동 -->
-      <a href="creative_coding_academy_responsive.html" class="hero-card hc-elem">
-        <span class="hc-tag">Elementary</span>
-        <h2>초등부</h2>
-        <p>한국코드페어·전국대회 준비<br/>아이디어 발굴부터 작품 제작, 발표까지</p>
-      </a>
-
-      <a href="middle_school.html" class="hero-card hc-mid">
-        <span class="hc-tag">Middle School</span>
-        <h2>중등부</h2>
-        <p>디미고·과학고·국제학교 준비<br/>AI 프로젝트와 자기소개서 방향 설계</p>
-      </a>
-
-      <a href="high_school.html" class="hero-card hc-high">
-        <span class="hc-tag">High School</span>
-        <h2>고등부</h2>
-        <p>생기부·세특·대입 컨설팅<br/>전공 적합성과 탐구 스토리 구성</p>
-      </a>
-
+    <p class="hero-desc" id="heroDesc">코딩을 가르치는 것이 아닙니다. AI를 도구로 아이의 생각을 현실로 만들고, 문제를 해결하며, 미래를 준비하는 힘을 기릅니다.</p>
+    <div class="hero-btns">
+      <a href="roadmap.html" class="hero-btn-primary">성장 로드맵 보기 →</a>
+      <a href="#contact" class="hero-btn-outline">상담 예약하기 →</a>
     </div>
   </div>
   <div class="scroll-indicator">
     <div class="scroll-bar"></div>
     <div class="scroll-lbl">Scroll</div>
+  </div>
+</section>
+
+<!-- WHY CODING NOW -->
+<section class="why-coding-sec" id="why-coding">
+  <div class="wrap">
+    <div class="why-coding-header reveal">
+      <div class="eyebrow">Why Coding Now</div>
+      <div class="why-coding-title">왜 지금 코딩을 배워야 할까요?</div>
+    </div>
+    <div class="why-coding-grid reveal">
+      <div class="wc-card">
+        <div class="wc-title">AI 시대 필수 역량</div>
+        <div class="wc-desc">AI가 답을 주는 시대,<br/>좋은 질문을 하고 활용하는 능력이<br/>가장 큰 경쟁력이 됩니다.</div>
+      </div>
+      <div class="wc-card wc-card--mid">
+        <div class="wc-title">입시의 핵심 경쟁력</div>
+        <div class="wc-desc">프로젝트, 탐구, 연구 경험은<br/>학생만의 스토리를 만들고<br/>생기부의 강력한 무기가 됩니다.</div>
+      </div>
+      <div class="wc-card">
+        <div class="wc-title">함께 성장하는 힘</div>
+        <div class="wc-desc">미래 사회는 협업과 소통을 통해<br/>복잡한 문제를 해결하는<br/>사람을 원합니다.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 일주일 2시간 -->
+<section class="twohours-sec">
+  <div class="wrap">
+    <div class="twohours-inner reveal">
+      <div class="twohours-left">
+        <div class="eyebrow">Only 2 Hours a Week</div>
+        <div class="twohours-title">일주일 <em class="twohours-num">2</em>시간의 투자로<br/>아이만의 무기를 만듭니다</div>
+        <p class="twohours-desc">일주일 2시간.<br/>꾸준한 경험이 몇 년 뒤 생기부와 진로의 방향을 바꿀 수 있습니다.</p>
+      </div>
+      <div class="twohours-right">
+        <div class="twohours-compare">
+          <div class="tc-col tc-col--all">
+            <div class="tc-label">모든 아이가 하는 공부</div>
+            <div class="tc-item">영어</div>
+            <div class="tc-item">수학</div>
+            <div class="tc-item">과학</div>
+            <div class="tc-note">모두 중요합니다.<br/>하지만 모든 아이가 같은 공부를 합니다.</div>
+          </div>
+          <div class="tc-vs">VS</div>
+          <div class="tc-col tc-col--unique">
+            <div class="tc-label tc-label--gold">아이만의 차별화된 자산</div>
+            <div class="tc-item tc-item--gold">프로젝트 경험</div>
+            <div class="tc-item tc-item--gold">탐구 경험</div>
+            <div class="tc-item tc-item--gold">발표 경험</div>
+            <div class="tc-item tc-item--gold">문제 해결 경험</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 10년 성장 로드맵 -->
+<section class="roadmap-sec" id="roadmap">
+  <div class="wrap">
+    <div class="roadmap-header reveal">
+      <div class="eyebrow">10-Year Growth Roadmap</div>
+      <div class="roadmap-title">초등부터 대학까지, <em class="roadmap-num">10</em>년 성장 로드맵</div>
+    </div>
+    <div class="roadmap-grid reveal">
+      <div class="rm-card">
+        <div class="rm-stage rm-stage--elem">초등</div>
+        <div class="rm-sub">창의력 · 기초 역량</div>
+        <div class="rm-heading">우리 아이는<br/>무엇을 좋아할까요?</div>
+        <div class="rm-desc">많은 아이들이 좋아하는 것을 찾지 못한 채 성장합니다.<br/>우리는 다양한 프로젝트를 통해 아이의 가능성을 발견합니다.</div>
+        <div class="rm-tags">
+          <span>한국코드페어</span>
+          <span>창작 프로젝트</span>
+          <span>AI 기초</span>
+        </div>
+      </div>
+      <div class="rm-arrow">▶</div>
+      <div class="rm-card">
+        <div class="rm-stage rm-stage--mid">중등</div>
+        <div class="rm-sub">대회 · 특목고 준비</div>
+        <div class="rm-heading">좋아하는 것을<br/>잘하는 것으로</div>
+        <div class="rm-desc">관심은 재능이 되고, 재능은 실력이 됩니다.<br/>대회와 프로젝트를 통해 아이만의 강점을 만들어갑니다.</div>
+        <div class="rm-tags">
+          <span>정보올림피아드</span>
+          <span>디미고·과학고</span>
+          <span>포트폴리오</span>
+        </div>
+      </div>
+      <div class="rm-arrow">▶</div>
+      <div class="rm-card">
+        <div class="rm-stage rm-stage--high">고등</div>
+        <div class="rm-sub">탐구 · 생기부 · 연구</div>
+        <div class="rm-heading">잘하는 것을<br/>진로로</div>
+        <div class="rm-desc">탐구와 연구 활동은 학생부의 경쟁력이 됩니다.<br/>아이의 강점을 대학이 인정하는 스토리로 만듭니다.</div>
+        <div class="rm-tags">
+          <span>생기부 설계</span>
+          <span>소논문</span>
+          <span>수시 전략</span>
+        </div>
+      </div>
+      <div class="rm-arrow">▶</div>
+      <div class="rm-card rm-card--last">
+        <div class="rm-stage rm-stage--univ">대학 &amp; 미래</div>
+        <div class="rm-sub">진학 · 진로 · 사회</div>
+        <div class="rm-heading">결국 중요한 것은<br/>사람입니다</div>
+        <div class="rm-desc">AI가 발전할수록 더 중요해지는 것은 창의성, 협업, 소통, 문제해결력입니다.<br/>우리는 아이가 미래 사회를 살아갈 힘을 기르도록 돕습니다.</div>
+        <div class="rm-tags">
+          <span>대입 합격</span>
+          <span>진로 설계</span>
+          <span>AI 인재</span>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -376,7 +551,7 @@ footer{background:var(--ink);padding:28px 48px;border-top:0.5px solid var(--line
 
 <footer>
   <div class="footer-inner">
-    <div class="footer-logo">Lee · Eunjin</div>
+    <div class="footer-logo">Creative Coding Art</div>
     <div class="footer-copy">© 2026 PMI Corp.</div>
   </div>
 </footer>
@@ -447,6 +622,18 @@ const revealIO=new IntersectionObserver(entries=>{
   });
 },{threshold:0.15});
 revealEls.forEach(el=>revealIO.observe(el));
+
+/* ── iframe 높이 자동 조절 ── */
+function resizeIframe(iframe){
+  try{ iframe.style.height=iframe.contentWindow.document.documentElement.scrollHeight+'px'; }catch(e){}
+}
+['iframe-elem','iframe-mid','iframe-high'].forEach(function(id){
+  var iframe=document.getElementById(id);
+  if(!iframe)return;
+  iframe.addEventListener('load',function(){resizeIframe(iframe);});
+  setTimeout(function(){resizeIframe(iframe);},1200);
+  setTimeout(function(){resizeIframe(iframe);},3000);
+});
 </script>
 </body>
 </html>
